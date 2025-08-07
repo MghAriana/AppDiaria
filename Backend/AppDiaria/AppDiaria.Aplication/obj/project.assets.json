@@ -1,11 +1,30 @@
 {
   "version": 3,
   "targets": {
-    "net8.0": {}
+    "net8.0": {
+      "AppDiaria.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/AppDiaria.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/AppDiaria.Domain.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "AppDiaria.Domain/1.0.0": {
+      "type": "project",
+      "path": "../AppDiaria.Domain/AppDiaria.Domain.csproj",
+      "msbuildProject": "../AppDiaria.Domain/AppDiaria.Domain.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    "net8.0": []
+    "net8.0": [
+      "AppDiaria.Domain >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\ignac\\.nuget\\packages\\": {}
@@ -31,7 +50,11 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\ignac\\Desktop\\AppDiaria\\Backend\\AppDiaria\\AppDiaria.Domain\\AppDiaria.Domain.csproj": {
+              "projectPath": "C:\\Users\\ignac\\Desktop\\AppDiaria\\Backend\\AppDiaria\\AppDiaria.Domain\\AppDiaria.Domain.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
