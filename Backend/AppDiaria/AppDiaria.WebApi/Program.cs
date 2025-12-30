@@ -1,9 +1,21 @@
+using AppDiaria.Aplication.Interfaces;
+using AppDiaria.Aplication.Services;
+using AppDiaria.Infreaestructure.Repositorios;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+///controlador
+builder.Services.AddControllers();
+
+////servicios y repo
+builder.Services.AddScoped<ITareaService, TareaService>();
+builder.Services.AddScoped<IRepositorioTarea, RepositorioTarea>();
+
 
 var app = builder.Build();
 

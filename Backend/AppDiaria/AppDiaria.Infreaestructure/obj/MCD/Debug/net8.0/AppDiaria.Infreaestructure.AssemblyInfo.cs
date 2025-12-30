@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AppDiaria.Infreaestructure")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+83bf4acff9bbc45068fb58a685c75e71913e046e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+230f5d7e356c60d87eadac23ff3f5fc0e5fd8d28")]
 [assembly: System.Reflection.AssemblyProductAttribute("AppDiaria.Infreaestructure")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AppDiaria.Infreaestructure")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
