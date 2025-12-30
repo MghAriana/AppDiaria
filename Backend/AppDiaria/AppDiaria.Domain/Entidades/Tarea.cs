@@ -54,9 +54,25 @@ public class Tarea
         _estado = Estado.Completa;
     }
 
-    
+    public void NoRealizada(DateTime fecha)
+    {
+        if (estaEnRango(fecha))
+        {
+            throw new Exception("La tarea esta pendiente");
+        }
+        _estado = Estado.Incompleta;
+    }
+
+
     public bool estaEnRango(DateTime fecha)
     {
         return _fecha < fecha || fecha > _fin;
     }
+
+    public void agregarItem(String item) //deberia crear una clase item??
+    {
+        this._item.Add(item);
+    }
+
+    
 }
