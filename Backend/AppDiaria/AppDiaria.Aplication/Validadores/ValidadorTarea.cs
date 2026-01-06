@@ -4,19 +4,16 @@ namespace AppDiaria.Aplication.Validadores;
 
 public class ValidadorTarea
 {
-    private readonly DateTime fecha;
-    public bool ValidadorT(Tarea tarea, out string MensajeError)
-    {
-        MensajeError = "";
-        if (string.IsNullOrWhiteSpace(tarea.getNombre()))
-        {
-            MensajeError += "el campo nombre no puede estar vacio";
-        }
-        if (!tarea.estaEnRango(fecha))
-        {
-            MensajeError += "la fecha es invalida";
-        }
+    public bool Validar(Tarea tarea, out string mensajeError)
+{
+    mensajeError = "";
 
-            return MensajeError == "";
-    }
+    if (string.IsNullOrWhiteSpace(tarea.Nombre))
+        mensajeError += "El nombre no puede estar vacío.\n";
+
+    if (tarea.Fecha > tarea.Fin)
+        mensajeError += "La fecha de inicio no puede ser mayor a la de fin.\n";
+
+    return mensajeError == "";
+}
 }

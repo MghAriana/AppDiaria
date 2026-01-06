@@ -2,6 +2,7 @@ using System;
 using AppDiaria.Aplication.Interfaces;
 using AppDiaria.Domain.Entidades;
 using AppDiaria.Infreaestructure.DB;
+using SQLitePCL;
 
 namespace AppDiaria.Infreaestructure.Repositorios;
 
@@ -14,16 +15,8 @@ public class RepositorioTarea : IRepositorioTarea
     }
     public void CrearTarea(Tarea tarea)
     {
-        var existe = _context.Tareas.Any(tar => tar.Id == tarea.Id);
-        if (!existe)
-        {
             _context.Tareas.Add(tarea);
-            _context.SaveChanges();
-        }
-        else
-        {
-            Console.WriteLine("La tarea ya existe");
-        }
+            _context.SaveChanges();  
     }
 
     public void EliminarTarea(int id)
@@ -43,11 +36,17 @@ public class RepositorioTarea : IRepositorioTarea
 
     public void ModificarTarea(Tarea tarea)
     {
-        var tareaExistente = _context.Tareas.Find(tarea.Id);
-        if (tareaExistente == null)
+       /* var tareaExistente = _context.Tareas.Find(tarea.Id);
+        if (tareaExistente != null)
         {
-            throw new Exception();
+            throw new Exception ();
         }
-        _context.Entry(tareaExistente).CurrentValues.SetValues(tarea);
+        _context.Entry(tareaExistente).CurrentValues.SetValues(tarea);*/
+         _context.SaveChanges();
     }
+    public Tarea? ObtenerPorId(int id)
+    {
+        return _context.Tareas.FirstOrDefault(t => t.Id == id);
+    }
+
 }

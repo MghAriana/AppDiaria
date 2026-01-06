@@ -9,7 +9,7 @@ public class AgregarUseCase(IRepositorioTarea repoT, ValidadorTarea validadorTar
 {
     public void Ejecutar(Tarea tarea)
     {
-        if (validadorTarea.ValidadorT(tarea, out string MensajeError))
+        if (validadorTarea.Validar(tarea, out string MensajeError))
         {
             throw new Exception(MensajeError);
         }

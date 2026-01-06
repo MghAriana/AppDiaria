@@ -1,45 +1,39 @@
 using System;
+using System.Collections;
+using System.ComponentModel.DataAnnotations;
 using System.Data.Common;
 
 namespace AppDiaria.Domain.Entidades;
 
 public class Tarea
 {
-    public int Id { get; }
-    private string? _nombre;
-    private string? _descripcion;
-    private List<string>? _item;
-    private DateTime _fecha;
-    private DateTime _fin;
+    [Key]
+    public int Id { get; private set; }
+    public string Nombre{get;set;} = string.Empty;
+    public string Descripcion{get;set;} = string.Empty;
+    //private List<Item>? _item = [];
+    public DateTime Fecha{get;set;}
+    public DateTime Fin{get;set;}
     private Estado _estado;
 
 
-    public Tarea(int id, string? nombre, string? descripcion, List<string> item, DateTime inicio, DateTime duracion)
+    public Tarea( string nombre, string descripcion,/*0List<Item> lista ,*/ DateTime inicio, DateTime duracion)
     {
-        this.Id = id;
-        this._nombre = nombre;
-        this._descripcion = descripcion;
-        this._item = item;
-        this._fecha = inicio; //DateTime.Today;
-        this._fin = duracion;
+        
+        this.Nombre = nombre;
+        this.Descripcion = descripcion;
+       // this._item = lista;
+        this.Fecha = inicio; //DateTime.Today;
+        this.Fin = duracion;
         this._estado = Estado.Pendiente;
     }
-    public String? getNombre()
+    //contructor vacio para EntityFramework
+    protected Tarea(){}
+   
+   /* public List<Item> listarItem()
     {
-        return this._nombre;
-    }
-    public void setNombre(String nombre)
-    {
-        this._nombre = nombre;
-    }
-    public String? getDescripcion()
-    {
-        return _descripcion;
-    }
-    public void setDescripcion(String campo)
-    {
-        this._descripcion = campo;
-    }
+        return _item.getItem();
+    }*/
     public void Iniciar()
     {
         _estado = Estado.Pendiente;
@@ -56,7 +50,7 @@ public class Tarea
 
     public void NoRealizada(DateTime fecha)
     {
-        if (estaEnRango(fecha))
+        if (EstaEnRango(fecha))
         {
             throw new Exception("La tarea esta pendiente");
         }
@@ -64,15 +58,25 @@ public class Tarea
     }
 
 
-    public bool estaEnRango(DateTime fecha)
+  
+    public bool EstaEnRango(DateTime fecha)
     {
-        return _fecha < fecha || fecha > _fin;
+        return fecha >= Fecha && fecha <= Fin;
     }
 
-    public void agregarItem(String item) //deberia crear una clase item??
+    
+    public void Actualizar(string nombre, string descripcion, DateTime fecha, DateTime fin)
     {
-        this._item.Add(item);
+            Nombre = nombre;
+            Descripcion = descripcion;
+            Fecha = fecha;
+            Fin = fin;
     }
+
+   /* public void agregarItem(String item) //deberia crear una clase item??
+    {
+        _item.Add(item);
+    }*/
 
     
 }

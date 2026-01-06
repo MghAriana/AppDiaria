@@ -7,6 +7,9 @@ public interface IRepositorioTarea
 {
     public void CrearTarea(Tarea tarea);
     public List<Tarea> ListarTareas();
-    public void EliminarTarea(int id);
+   void EliminarTarea(int id);
+
     public void ModificarTarea(Tarea tarea);
+    Tarea? ObtenerPorId(int id);
+
 }

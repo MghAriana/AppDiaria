@@ -1,6 +1,8 @@
 using AppDiaria.Aplication.Interfaces;
 using AppDiaria.Aplication.Services;
+using AppDiaria.Infreaestructure.DB;
 using AppDiaria.Infreaestructure.Repositorios;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,9 +14,20 @@ builder.Services.AddSwaggerGen();
 ///controlador
 builder.Services.AddControllers();
 
+builder.Services.AddScoped<AppDiariaContext>();
+
+
 ////servicios y repo
-builder.Services.AddScoped<ITareaService, TareaService>();
 builder.Services.AddScoped<IRepositorioTarea, RepositorioTarea>();
+
+builder.Services.AddScoped<ITareaService, TareaService>();
+
+/*builder.Services.AddDbContext<AppDiariaContext>(options =>
+    options.UseSqlite(
+        builder.Configuration.GetConnectionString("DefaultConnection")
+    )
+);*/
+
 
 
 var app = builder.Build();
@@ -47,6 +60,9 @@ app.MapGet("/weatherforecast", () =>
 })
 .WithName("GetWeatherForecast")
 .WithOpenApi();
+
+app.MapControllers();
+
 
 app.Run();
 

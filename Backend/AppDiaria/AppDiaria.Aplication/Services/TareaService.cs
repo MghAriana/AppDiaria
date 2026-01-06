@@ -1,4 +1,5 @@
 using System;
+using AppDiaria.Aplication.DTOS.Tarea;
 using AppDiaria.Aplication.Interfaces;
 using AppDiaria.Domain.Entidades;
 
@@ -11,21 +12,58 @@ public class TareaService:ITareaService
     {
         _repositorioTarea = repositorioTarea;
     }
-    public List<Tarea> ListarTareas()
-    {
-        return _repositorioTarea.ListarTareas();
-    }
-    public void CrearTarea(Tarea tarea)
-    {
-        _repositorioTarea.CrearTarea(tarea);
-    }
+           public List<TareaDto> ListarTareas()
+        {
+            return _repositorioTarea.ListarTareas()
+                .Select(t => new TareaDto
+                {
+                    Id = t.Id,
+                    Nombre = t.Nombre,
+                    Descripcion = t.Descripcion,
+                    FechaInicio = t.Fecha,
+                    FechaFin = t.Fin
+                })
+                .ToList();
+        }
 
-    public void EliminarTarea(int id)
+        public void CrearTarea(CrearTareaDto dto)
+        {
+            var tarea = new Tarea(
+                dto.Nombre,
+                dto.Descripcion,
+                dto.Fecha,
+                dto.Fin
+            );
+
+            _repositorioTarea.CrearTarea(tarea);
+        }
+
+    public void ActualizarTarea(ActualizarTareaDto dto)
     {
-        _repositorioTarea.EliminarTarea(id);
-    }
-    public void ModificarTarea(Tarea tarea)
-    {
-        _repositorioTarea.ModificarTarea(tarea);
-    }
+    var tarea = _repositorioTarea.ObtenerPorId(dto.Id);
+
+    if (tarea == null)
+        throw new Exception("Tarea no encontrada");
+
+    tarea.Actualizar(
+        dto.Nombre,
+        dto.Descripcion,
+        dto.FechaInicio,
+        dto.FechaFin
+    );
+
+    _repositorioTarea.ModificarTarea(tarea);
 }
+
+        public void EliminarTarea(int id)
+        {
+            var tarea = _repositorioTarea.ObtenerPorId(id);
+
+            if (tarea == null)
+                throw new Exception("Tarea no encontrada");
+
+            _repositorioTarea.EliminarTarea(id);
+
+        }
+}
+

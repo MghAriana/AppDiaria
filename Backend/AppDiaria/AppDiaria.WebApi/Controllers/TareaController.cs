@@ -1,5 +1,7 @@
+using AppDiaria.Aplication.DTOS.Tarea;
 using AppDiaria.Aplication.Interfaces;
 using AppDiaria.Domain.Entidades;
+
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -22,21 +24,21 @@ namespace AppDiaria.WebApi.Controllers
         }
                 
         [HttpPost]
-        public ActionResult Crear([FromBody] Tarea tarea)
-        {
-            _tareaService.CrearTarea(tarea);
-            return CreatedAtAction(nameof(Get), new { id = tarea.Id }, tarea);
-        }
+    public ActionResult Crear([FromBody] CrearTareaDto dto)
+    {
+        _tareaService.CrearTarea(dto);
+        return Ok();
+    }
 
-        [HttpPut("{id}")]
-        public ActionResult Modificar(int id, [FromBody] Tarea tarea)
-        {
-            if (id != tarea.Id)
-                return BadRequest("El id no coincide");
+    [HttpPut("{id}")]
+    public ActionResult Modificar(int id, [FromBody] ActualizarTareaDto dto)
+    {
+        if (id != dto.Id)
+            return BadRequest("El id no coincide");
 
-            _tareaService.ModificarTarea(tarea);
-            return NoContent();
-        }
+        _tareaService.ActualizarTarea(dto);
+        return NoContent();
+    }
 
         [HttpDelete("{id}")]
         public ActionResult Eliminar(int id)

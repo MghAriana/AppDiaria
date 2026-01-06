@@ -8,6 +8,7 @@ public class Usuario
     public string? Nombre { get; set; }
     public string? Email { get; set; }
     public string? Contraseña { get; set; }
+    //aca deberia haber una lista de permisos de usuario
 
     public Usuario() { }
 
@@ -17,5 +18,10 @@ public class Usuario
         Nombre = nombre;
         Email = email;
         Contraseña = contraseña;
+    }
+       public override string ToString(){
+        string aux="";
+        aux+= $"Usuario Actual: {this.Nombre}  ";
+        return aux;
     }
 }
