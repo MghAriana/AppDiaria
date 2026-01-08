@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <Folder Include="DTOS\" />
+    <Folder Include="DTOS\Recordatorio\" />
     <Folder Include="DTOS\Tarea\" />
   </ItemGroup>
 

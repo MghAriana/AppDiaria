@@ -1,21 +1,29 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace AppDiaria.Domain.Entidades;
 
 public class Recordatorio
 {
-    public int Id { get; set; }
+    [Key]
+    public int Id { get; private set; }
     public string? Nombre { get; set; }
     public string? Descripcion { get; set; }
-    public TimeOnly Hora { get; set; }
+    public DateTime FechayHora { get; set; }
 
-    public Recordatorio() { }
+    protected Recordatorio() { }//lo usa EntityFramework 
 
-    public Recordatorio(int id, string nombre, string descripcion, TimeOnly hora)
+    public Recordatorio( string? nombre, string? descripcion, DateTime hora)
     {
-        this.Id = id;
         this.Nombre = nombre;
         this.Descripcion = descripcion;
-        this.Hora = hora;
+        this.FechayHora = hora;
+    }
+    public void Actualizar(string nombre, string descripcion, DateTime Fyhora)
+    {
+        this.Nombre = nombre;
+        this.Descripcion = descripcion;
+        this.FechayHora = Fyhora;
+        
     }
 }

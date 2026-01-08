@@ -19,8 +19,10 @@ builder.Services.AddScoped<AppDiariaContext>();
 
 ////servicios y repo
 builder.Services.AddScoped<IRepositorioTarea, RepositorioTarea>();
-
 builder.Services.AddScoped<ITareaService, TareaService>();
+
+builder.Services.AddScoped<IRepositorioRecordatorio,RepositorioRecordatorio>();
+builder.Services.AddScoped<IRecordatorioService, RecordatorioService>();
 
 /*builder.Services.AddDbContext<AppDiariaContext>(options =>
     options.UseSqlite(

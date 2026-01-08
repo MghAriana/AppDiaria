@@ -9,5 +9,6 @@ public interface IRepositorioRecordatorio
     public List<Recordatorio> ListarRecordatorios();
     public void EliminarRecordatorio(int id);
     public void ModificarRecordatorio(Recordatorio recordatorio);
+    public Recordatorio? ObtenerId(int id);
 }
  

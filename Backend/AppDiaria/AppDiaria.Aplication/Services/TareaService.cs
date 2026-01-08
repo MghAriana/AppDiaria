@@ -38,22 +38,22 @@ public class TareaService:ITareaService
             _repositorioTarea.CrearTarea(tarea);
         }
 
-    public void ActualizarTarea(ActualizarTareaDto dto)
+    public void ActualizarTarea(int id, ActualizarTareaDto dto)
     {
-    var tarea = _repositorioTarea.ObtenerPorId(dto.Id);
+        var tarea = _repositorioTarea.ObtenerPorId(id);
 
-    if (tarea == null)
-        throw new Exception("Tarea no encontrada");
+        if (tarea == null)
+            throw new Exception("Tarea no encontrada");
 
-    tarea.Actualizar(
-        dto.Nombre,
-        dto.Descripcion,
-        dto.FechaInicio,
-        dto.FechaFin
-    );
+        tarea.Actualizar(
+            dto.Nombre,
+            dto.Descripcion,
+            dto.FechaInicio,
+            dto.FechaFin
+        );
 
-    _repositorioTarea.ModificarTarea(tarea);
-}
+        _repositorioTarea.ModificarTarea(tarea);
+    }
 
         public void EliminarTarea(int id)
         {

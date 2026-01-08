@@ -25,12 +25,12 @@ public class RepositorioRecordatorio : IRepositorioRecordatorio
 
     public void EliminarRecordatorio(int id)
     {
-        var recEliminar = _context.Recordatorios.Where(rec => rec.Id == id).SingleOrDefault();
+       /* var recEliminar = _context.Recordatorios.Where(rec => rec.Id == id).SingleOrDefault();
         if (recEliminar == null)
         {
             throw new Exception();
         }
-        _context.Remove(recEliminar);
+        _context.Remove(recEliminar);*/
         _context.SaveChanges();
     }
 
@@ -41,13 +41,19 @@ public class RepositorioRecordatorio : IRepositorioRecordatorio
 
     public void ModificarRecordatorio(Recordatorio recordatorio)
     {
-        var existeRecordatorio = _context.Recordatorios.Find(recordatorio.Id);
+       var existeRecordatorio = _context.Recordatorios.Find(recordatorio.Id);
         if (existeRecordatorio == null)
         {
             throw new Exception();
         }
-        _context.Entry(existeRecordatorio).CurrentValues.SetValues(recordatorio);
+        existeRecordatorio.Nombre = recordatorio.Nombre;
+        existeRecordatorio.Descripcion= recordatorio.Descripcion;
+        existeRecordatorio.FechayHora = recordatorio.FechayHora;
         _context.SaveChanges();
     }
-    
+
+    public Recordatorio? ObtenerId(int id)
+    {
+        return _context.Recordatorios.FirstOrDefault(t => t.Id == id);
+    }
 }

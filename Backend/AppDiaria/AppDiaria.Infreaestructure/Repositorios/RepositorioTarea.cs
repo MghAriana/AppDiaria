@@ -36,12 +36,15 @@ public class RepositorioTarea : IRepositorioTarea
 
     public void ModificarTarea(Tarea tarea)
     {
-       /* var tareaExistente = _context.Tareas.Find(tarea.Id);
-        if (tareaExistente != null)
+        var tareaExistente = _context.Tareas.Find(tarea.Id);
+        if (tareaExistente == null)
         {
             throw new Exception ();
         }
-        _context.Entry(tareaExistente).CurrentValues.SetValues(tarea);*/
+        tareaExistente.Nombre= tarea.Nombre;
+        tareaExistente.Descripcion= tarea.Descripcion;
+        tareaExistente.Fecha = tarea.Fecha;
+        tareaExistente.Fin = tarea.Fin;
          _context.SaveChanges();
     }
     public Tarea? ObtenerPorId(int id)

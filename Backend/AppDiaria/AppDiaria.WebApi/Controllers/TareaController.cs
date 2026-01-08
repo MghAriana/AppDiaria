@@ -24,27 +24,24 @@ namespace AppDiaria.WebApi.Controllers
         }
                 
         [HttpPost]
-    public ActionResult Crear([FromBody] CrearTareaDto dto)
-    {
-        _tareaService.CrearTarea(dto);
-        return Ok();
-    }
+        public ActionResult Crear([FromBody] CrearTareaDto dto)
+        {
+            _tareaService.CrearTarea(dto);
+            return Ok();
+        }
 
-    [HttpPut("{id}")]
-    public ActionResult Modificar(int id, [FromBody] ActualizarTareaDto dto)
-    {
-        if (id != dto.Id)
-            return BadRequest("El id no coincide");
-
-        _tareaService.ActualizarTarea(dto);
-        return NoContent();
-    }
-
+       [HttpPut("{id}")]
+        public IActionResult Put(int id, [FromBody] ActualizarTareaDto dto)
+        {
+            _tareaService.ActualizarTarea(id, dto);
+            return Ok();
+        }
+        
         [HttpDelete("{id}")]
         public ActionResult Eliminar(int id)
         {
             _tareaService.EliminarTarea(id);
             return NoContent();
         }
-    }
+        }
 }

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AppDiaria.WebApi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f775e5e94772fb5f5453243dc7d119292fc1075a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e828de9430c6dc574ba6f7396c4ae5135ed4bee3")]
 [assembly: System.Reflection.AssemblyProductAttribute("AppDiaria.WebApi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AppDiaria.WebApi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
