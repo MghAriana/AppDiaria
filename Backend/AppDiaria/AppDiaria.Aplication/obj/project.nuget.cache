@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "GcKo97n8IiU=",
+  "dgSpecHash": "iKa7CCr4SNY=",
   "success": true,
   "projectFilePath": "C:\\Users\\ignac\\Desktop\\AppDiaria\\Backend\\AppDiaria\\AppDiaria.Aplication\\AppDiaria.Aplication.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\ignac\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.0\\microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512"
+  ],
   "logs": []
 }

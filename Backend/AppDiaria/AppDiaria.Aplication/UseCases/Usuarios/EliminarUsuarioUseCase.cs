@@ -4,7 +4,7 @@ using AppDiaria.Domain.Entidades;
 
 namespace AppDiaria.Aplication.UseCases.Usuarios;
 
-public class EliminarUseCase(IRepositorioUsuario repositorioUsuario)
+public class EliminarUsuarioUseCase(IRepositorioUsuario repositorioUsuario)
 {
     public void Ejecutar(int id)
     {

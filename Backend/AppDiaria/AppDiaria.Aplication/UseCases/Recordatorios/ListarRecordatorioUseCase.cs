@@ -4,7 +4,7 @@ using AppDiaria.Domain.Entidades;
 
 namespace AppDiaria.Aplication.UseCases.Recordatorios;
 
-public class ListarUseCase(IRepositorioRecordatorio repoRec)
+public class ListarRecordatorioUseCase(IRepositorioRecordatorio repoRec)
 {
     public List<Recordatorio> Ejecutar()
     {

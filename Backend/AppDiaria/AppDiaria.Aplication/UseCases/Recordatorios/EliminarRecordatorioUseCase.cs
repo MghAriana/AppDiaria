@@ -3,7 +3,7 @@ using AppDiaria.Aplication.Interfaces;
 
 namespace AppDiaria.Aplication.UseCases.Recordatorios;
 
-public class EliminarUseCase(IRepositorioRecordatorio repositorioRecordatorio)
+public class EliminarRecordatorioUseCase(IRepositorioRecordatorio repositorioRecordatorio)
 {
     public void Ejecutar(int id)
     {

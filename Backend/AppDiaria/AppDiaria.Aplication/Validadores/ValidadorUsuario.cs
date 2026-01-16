@@ -25,10 +25,8 @@ public class ValidadorUsuario(IRepositorioUsuario repoUs)
                 MensajeError = "Email no valido";
             }
         }
-        if (string.IsNullOrWhiteSpace(usuario.Contraseña))
-        {
-            MensajeError += "El campo contraseña no puede estar vacio";
-        }
+            
+        
         return MensajeError == "";
     }
 }

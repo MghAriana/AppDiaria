@@ -11,7 +11,7 @@ public class ValidadorTarea
     if (string.IsNullOrWhiteSpace(tarea.Nombre))
         mensajeError += "El nombre no puede estar vacío.\n";
 
-    if (tarea.Fecha > tarea.Fin)
+    if (tarea.FechaInicio > tarea.FechaFin)
         mensajeError += "La fecha de inicio no puede ser mayor a la de fin.\n";
 
     return mensajeError == "";

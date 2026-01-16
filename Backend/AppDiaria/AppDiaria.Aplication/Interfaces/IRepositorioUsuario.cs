@@ -11,4 +11,5 @@ public interface IRepositorioUsuario
     public void ModificarUsuario(Usuario usuario);
     public Usuario ObtenerUsuario(int id_Usuario);
     public bool ExisteEmail(string email);
+    bool Existe(int idUsuario);
 }

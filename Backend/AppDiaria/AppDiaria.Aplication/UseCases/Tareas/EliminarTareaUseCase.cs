@@ -3,7 +3,7 @@ using AppDiaria.Aplication.Interfaces;
 
 namespace AppDiaria.Aplication.UseCases.Tareas;
 
-public class EliminarUseCase(IRepositorioTarea repositorioTarea)
+public class EliminarTareaUseCase(IRepositorioTarea repositorioTarea)
 {
     public void Ejecutar(int id)
     {

@@ -43,8 +43,8 @@ public class RepositorioTarea : IRepositorioTarea
         }
         tareaExistente.Nombre= tarea.Nombre;
         tareaExistente.Descripcion= tarea.Descripcion;
-        tareaExistente.Fecha = tarea.Fecha;
-        tareaExistente.Fin = tarea.Fin;
+        tareaExistente.FechaInicio = tarea.FechaInicio;
+        tareaExistente.FechaFin = tarea.FechaFin;
          _context.SaveChanges();
     }
     public Tarea? ObtenerPorId(int id)

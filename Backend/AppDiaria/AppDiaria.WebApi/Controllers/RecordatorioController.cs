@@ -1,47 +1,56 @@
 using AppDiaria.Aplication.DTOS.Recordatorio;
-using AppDiaria.Aplication.Interfaces;
-using AppDiaria.Domain.Entidades;
-using Microsoft.AspNetCore.Http;
+using AppDiaria.Aplication.UseCases.Recordatorios;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AppDiaria.WebApi.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
     public class RecordatorioController : ControllerBase
     {
-        private readonly IRecordatorioService _recordatorioService;
-        public RecordatorioController(IRecordatorioService recordatorioService)
+        private readonly AgregarRecordatorioUseCase _agregar;
+        private readonly ListarRecordatorioUseCase _listar;
+        private readonly ModificarRecordatorioUseCase _modificar;
+        private readonly EliminarRecordatorioUseCase _eliminar;
+
+        public RecordatorioController(
+            AgregarRecordatorioUseCase agregar,
+            ListarRecordatorioUseCase listar,
+            ModificarRecordatorioUseCase modificar,
+            EliminarRecordatorioUseCase eliminar)
         {
-            _recordatorioService = recordatorioService;
+            _agregar = agregar;
+            _listar = listar;
+            _modificar = modificar;
+            _eliminar = eliminar;
         }
+
         [HttpGet]
-        public ActionResult<List<Recordatorio>> Get()
+        public IActionResult Get()
         {
-            var recordatorios = _recordatorioService.ListarRecordatorio();
+            var recordatorios = _listar.Ejecutar();
             return Ok(recordatorios);
         }
-                
+
         [HttpPost]
-        public ActionResult Crear([FromBody] CrearRecordatorioDto dto)
+        public IActionResult Crear([FromBody] CrearRecordatorioDto dto)
         {
-            _recordatorioService.CrearRecordatorio(dto);
+            _agregar.Ejecutar(dto);
             return Ok();
         }
 
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody] ActualizarRecordatorioDto dto)
         {
-            _recordatorioService.ActualizarRecordatorio(id, dto);
+            _modificar.Ejecutar(id, dto);
             return Ok();
         }
 
-            [HttpDelete("{id}")]
-        public ActionResult Eliminar(int id)
+        [HttpDelete("{id}")]
+        public IActionResult Eliminar(int id)
         {
-            _recordatorioService.EliminarRecordatorio(id);
+            _eliminar.Ejecutar(id);
             return NoContent();
         }
-        }
+    }
 }
-

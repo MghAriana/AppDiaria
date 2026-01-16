@@ -1,8 +1,13 @@
 using AppDiaria.Aplication.Interfaces;
-using AppDiaria.Aplication.Services;
+
 using AppDiaria.Infreaestructure.DB;
 using AppDiaria.Infreaestructure.Repositorios;
 using Microsoft.EntityFrameworkCore;
+using AppDiaria.Aplication.DI_Container;
+using AppDiaria.Infraestructure;
+
+
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,14 +20,15 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 
 builder.Services.AddScoped<AppDiariaContext>();
+//UseCases
 
 
-////servicios y repo
-builder.Services.AddScoped<IRepositorioTarea, RepositorioTarea>();
-builder.Services.AddScoped<ITareaService, TareaService>();
 
-builder.Services.AddScoped<IRepositorioRecordatorio,RepositorioRecordatorio>();
-builder.Services.AddScoped<IRecordatorioService, RecordatorioService>();
+
+////servicios y repo  
+builder.Services.AddApplication(); //para el DI-container
+builder.Services.AddInfrastructure();
+
 
 /*builder.Services.AddDbContext<AppDiariaContext>(options =>
     options.UseSqlite(
@@ -67,6 +73,7 @@ app.MapControllers();
 
 
 app.Run();
+
 
 record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
 {

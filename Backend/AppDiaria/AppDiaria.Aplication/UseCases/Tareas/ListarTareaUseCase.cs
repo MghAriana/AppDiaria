@@ -4,7 +4,7 @@ using AppDiaria.Domain.Entidades;
 
 namespace AppDiaria.Aplication.UseCases.Tareas;
 
-public class ListarUseCase(IRepositorioTarea repoT)
+public class ListarTareaUseCase(IRepositorioTarea repoT)
 {
     public List<Tarea> Ejecutar()
     {

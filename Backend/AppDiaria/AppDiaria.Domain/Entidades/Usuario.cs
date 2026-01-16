@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace AppDiaria.Domain.Entidades;
 
@@ -7,21 +8,30 @@ public class Usuario
     public int Id { get; set; }
     public string? Nombre { get; set; }
     public string? Email { get; set; }
-    public string? Contraseña { get; set; }
+  //  public string? Contraseña { get; set; }
+    public DateTime FechaCreacion {get;private set;}
     //aca deberia haber una lista de permisos de usuario
 
     public Usuario() { }
 
-    public Usuario(int id, string nombre, string email, string contraseña)
+    public Usuario( string nombre, string email)
     {
-        Id = id;
+
         Nombre = nombre;
         Email = email;
-        Contraseña = contraseña;
+        //Contraseña = contraseña;
+        FechaCreacion= DateTime.UtcNow;
     }
-       public override string ToString(){
+    public void Actualizar(string nombre,string email)
+    {
+        Nombre = nombre;
+        Email = email; 
+    }
+
+     /*  public override string ToString(){
         string aux="";
         aux+= $"Usuario Actual: {this.Nombre}  ";
         return aux;
-    }
+    }*/
+
 }

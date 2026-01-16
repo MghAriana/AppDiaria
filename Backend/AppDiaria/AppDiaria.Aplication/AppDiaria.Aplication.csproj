@@ -8,6 +8,8 @@
     <Folder Include="DTOS\" />
     <Folder Include="DTOS\Recordatorio\" />
     <Folder Include="DTOS\Tarea\" />
+    <Folder Include="DTOS\Usuario\" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0" />
   </ItemGroup>
 
   <PropertyGroup>

@@ -14,7 +14,8 @@ public class RepositorioUsuario : IRepositorioUsuario
     }
     public void AgregarUsuario(Usuario usuario)
     {
-        throw new NotImplementedException();
+         _context.Usuarios.Add(usuario);
+        _context.SaveChanges();
     }
 
     public void EliminarUsuario(int id)
@@ -27,6 +28,11 @@ public class RepositorioUsuario : IRepositorioUsuario
         }
         _context.Remove(usuarioBorrar);
         _context.SaveChanges();
+    }
+
+    public bool Existe(int idUsuario)
+    {
+        return _context.Usuarios.Any(id=> id.Id == idUsuario);
     }
 
     public bool ExisteEmail(string email)

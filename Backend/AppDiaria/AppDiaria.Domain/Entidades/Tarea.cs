@@ -12,19 +12,21 @@ public class Tarea
     public string Nombre{get;set;} = string.Empty;
     public string Descripcion{get;set;} = string.Empty;
     //private List<Item>? _item = [];
-    public DateTime Fecha{get;set;}
-    public DateTime Fin{get;set;}
+    public DateTime FechaInicio{get;set;}
+    public DateTime FechaFin{get;set;}
     private Estado _estado;
+    public int IdUsuario{get;private set;}
 
 
-    public Tarea( string nombre, string descripcion,/*0List<Item> lista ,*/ DateTime inicio, DateTime duracion)
+    public Tarea( string nombre, string descripcion,/*0List<Item> lista ,*/ DateTime inicio, DateTime duracion,int idUsuario)
     {
         
         this.Nombre = nombre;
         this.Descripcion = descripcion;
        // this._item = lista;
-        this.Fecha = inicio; //DateTime.Today;
-        this.Fin = duracion;
+        this.FechaInicio = inicio; //DateTime.Today;
+        this.FechaFin = duracion;
+        this.IdUsuario= idUsuario;
         this._estado = Estado.Pendiente;
     }
     //contructor vacio para EntityFramework
@@ -61,7 +63,7 @@ public class Tarea
   
     public bool EstaEnRango(DateTime fecha)
     {
-        return fecha >= Fecha && fecha <= Fin;
+        return fecha >= FechaInicio && fecha <= FechaFin;
     }
 
     
@@ -69,8 +71,8 @@ public class Tarea
     {
             Nombre = nombre;
             Descripcion = descripcion;
-            Fecha = fecha;
-            Fin = fin;
+            FechaInicio = fecha;
+            FechaFin = fin;
     }
 
    /* public void agregarItem(String item) //deberia crear una clase item??

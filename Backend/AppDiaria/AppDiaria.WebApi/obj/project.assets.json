@@ -638,7 +638,8 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
         "dependencies": {
-          "AppDiaria.Domain": "1.0.0"
+          "AppDiaria.Domain": "1.0.0",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.0"
         },
         "compile": {
           "bin/placeholder/AppDiaria.Aplication.dll": {}
