@@ -16,4 +16,8 @@
     <ProjectReference Include="..\AppDiaria.Infreaestructure\AppDiaria.Infreaestructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controllers\ControllersSeccionRutinas\" />
+  </ItemGroup>
+
 </Project>

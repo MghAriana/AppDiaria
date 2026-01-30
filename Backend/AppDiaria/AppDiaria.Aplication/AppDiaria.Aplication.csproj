@@ -5,10 +5,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DTOS\" />
+    <Folder Include="DTOS\Ejercicios\" />
     <Folder Include="DTOS\Recordatorio\" />
+    <Folder Include="DTOS\Rutinas\" />
     <Folder Include="DTOS\Tarea\" />
     <Folder Include="DTOS\Usuario\" />
+    <Folder Include="Interfaces\InterfacesSeccionEntrenamientos\" />
+    <Folder Include="UseCases\Ejercicios\" />
+    <Folder Include="UseCases\Entrenamientos\" />
+    <Folder Include="UseCases\Rutinas\" />
+    <Folder Include="Validadores\SeccionRutinas\" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0" />
   </ItemGroup>
 

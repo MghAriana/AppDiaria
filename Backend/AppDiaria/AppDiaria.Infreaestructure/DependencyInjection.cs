@@ -4,6 +4,8 @@ using Microsoft.Extensions.DependencyInjection;
 using AppDiaria.Aplication.Interfaces;
 using AppDiaria.Infreaestructure.Repositorios;
 using AppDiaria.Infreaestructure.DB;
+using AppDiaria.Aplication.Interfaces.InterfacesSeccionEntrenamientos;
+using AppDiaria.Infreaestructure.Repositorios.RepositoriosSeccionRutinas;
 
 namespace AppDiaria.Infraestructure;
 
@@ -18,6 +20,9 @@ public static class DependencyInjection
         services.AddScoped<IRepositorioTarea, RepositorioTarea>();
         services.AddScoped<IRepositorioRecordatorio, RepositorioRecordatorio>();
         services.AddScoped<IRepositorioUsuario, RepositorioUsuario>(); // cuando exista
+        services.AddScoped<IRepositorioEjercicio, RepositorioEjercicio>();
+        services.AddScoped<IRepositorioEntrenamiento, RepositorioEntrenamientos>();
+        services.AddScoped<IRepositorioRutina, RepositorioRutina>();
 
         return services;
     }

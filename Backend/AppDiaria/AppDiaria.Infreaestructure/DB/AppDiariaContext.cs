@@ -1,5 +1,6 @@
 using System;
 using AppDiaria.Domain.Entidades;
+using AppDiaria.Domain.Entidades.Rutinas;
 using Microsoft.EntityFrameworkCore;
 namespace AppDiaria.Infreaestructure.DB;
 
@@ -9,6 +10,9 @@ public class AppDiariaContext : DbContext
     public DbSet<Tarea> Tareas { get; set; }
     public DbSet<Usuario> Usuarios { get; set; }
     public DbSet<Recordatorio> Recordatorios { get; set; }
+    public DbSet<Rutina> Rutinas {get;set;}
+    public DbSet<Entrenamientos> Entrenamientos {get;set;}
+    public DbSet<Ejercicio> Ejercicios{get;set;}
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {

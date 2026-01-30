@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AppDiaria.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a4ec0b747b74885ddc211350107bc4dba963d734")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d343a59e57a6f498ecbd99f172cc6ddd92d6557e")]
 [assembly: System.Reflection.AssemblyProductAttribute("AppDiaria.Domain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AppDiaria.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
