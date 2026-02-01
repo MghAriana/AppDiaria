@@ -25,7 +25,7 @@ public class AgregarTareaUseCase
 
     public void Ejecutar(CrearTareaDto dto)
     {
-        if (!_repoUsuario.Existe(dto.IdUsuario))
+        if (!_repoUsuario.Existe(dto.UsuarioId))
             throw new Exception("Usuario no existe");
 
         var tarea = new Tarea(
@@ -33,7 +33,7 @@ public class AgregarTareaUseCase
             dto.Descripcion,
             dto.Fecha,
             dto.Fin,
-            dto.IdUsuario
+            dto.UsuarioId
         );
 
         if (!_validador.Validar(tarea, out var error))

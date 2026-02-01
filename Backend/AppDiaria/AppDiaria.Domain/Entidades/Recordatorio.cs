@@ -11,6 +11,7 @@ public class Recordatorio
     public string? Descripcion { get; set; }
     public DateTime FechayHora { get; set; }
     public int IdUsuario {get;set;}
+    public Usuario? Usuario{get;set;}
 
     protected Recordatorio() { }//lo usa EntityFramework 
 

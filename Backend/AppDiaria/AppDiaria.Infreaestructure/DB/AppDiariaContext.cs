@@ -7,6 +7,10 @@ namespace AppDiaria.Infreaestructure.DB;
 public class AppDiariaContext : DbContext
 {
     
+    public AppDiariaContext(DbContextOptions<AppDiariaContext> options)
+        : base(options)
+    {
+    }
     public DbSet<Tarea> Tareas { get; set; }
     public DbSet<Usuario> Usuarios { get; set; }
     public DbSet<Recordatorio> Recordatorios { get; set; }
@@ -14,7 +18,7 @@ public class AppDiariaContext : DbContext
     public DbSet<Entrenamientos> Entrenamientos {get;set;}
     public DbSet<Ejercicio> Ejercicios{get;set;}
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    /*protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         optionsBuilder.UseSqlite("data source=AppDiaria.sqlite");
     }
@@ -27,5 +31,5 @@ public class AppDiariaContext : DbContext
         using var command = connection.CreateCommand();
         command.CommandText = "PRAGMA journal_mode=DELETE;";
         command.ExecuteNonQuery();
-    } 
+    } */
 }

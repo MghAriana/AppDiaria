@@ -10,16 +10,16 @@ public class Entrenamientos
     public int Id{get; set;}
     public string? Nombre{get;set;}
     public DateOnly Fecha{get;set;}
-    public List<Rutina> Rutinas{get;set;}
-    public int IdUsuario{get;set;}
+    public List<Rutina> Rutinas { get; set; } = new(); //mas adelante ver si es ICollection
+    public int UsuarioId{get;set;}
+    public Usuario? Usuario{get;set;}
 
     protected Entrenamientos(){}//ef
-    public Entrenamientos(string nombre, DateOnly fecha, int idUsuario)
+    public Entrenamientos(string nombre, DateOnly fecha, int UsuarioId)
     {
         Nombre= nombre;
         Fecha=fecha;
-        IdUsuario=idUsuario;
-
+        this.UsuarioId=UsuarioId;
     }
     
     public void AgregarRutina(Rutina rutina)
@@ -30,7 +30,7 @@ public class Entrenamientos
     {
         Nombre= nombre;
         Fecha=fecha;
-        IdUsuario=id;
+        UsuarioId=id;
     }
 
 }

@@ -42,7 +42,7 @@ public class RepositorioEntrenamientos:IRepositorioEntrenamiento
         }
         entrenamientosExistente.Nombre= entrenamientos.Nombre;
         entrenamientosExistente.Fecha=entrenamientos.Fecha;
-        entrenamientosExistente.IdUsuario = entrenamientos.IdUsuario;
+        entrenamientosExistente.UsuarioId=entrenamientos.UsuarioId;
         
          _context.SaveChanges();
     }

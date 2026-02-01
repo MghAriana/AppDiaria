@@ -8,5 +8,5 @@ public class CrearTareaDto
     public String? Descripcion { get; set; }
     public DateTime Fecha { get; set; }
     public DateTime Fin { get; set; }
-    public int IdUsuario{get; set;}
+    public int UsuarioId{get; set;}
 }

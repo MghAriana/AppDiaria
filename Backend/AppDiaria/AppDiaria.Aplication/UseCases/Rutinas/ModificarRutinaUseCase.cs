@@ -16,11 +16,11 @@ public class ModificarRutinaUseCase
         _validador = validador;
     }
 
-    public void Ejecutar(int id, ActualizarRutinaDto dto)
+   public void Ejecutar(int id, ActualizarRutinaDto dto)
     {
         var rutina = _repo.ObtnerPorId(id);
         if (rutina == null)
-            throw new Exception("Ejercicio no encontrado");
+            throw new Exception("Rutina no encontrada");
 
         rutina.Actualizar(
             dto.Nombre,
@@ -28,10 +28,11 @@ public class ModificarRutinaUseCase
             dto.Descripcion
         );
 
-        if (_validador.Validar(rutina, out var error))
+        if (!_validador.Validar(rutina, out var error))
             throw new Exception(error);
 
         _repo.ModificarRutina(rutina);
     }
+        
 
 }

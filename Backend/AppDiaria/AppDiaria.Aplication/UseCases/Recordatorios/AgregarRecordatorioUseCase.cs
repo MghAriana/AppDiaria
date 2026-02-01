@@ -25,14 +25,14 @@ public class AgregarRecordatorioUseCase
     }
     public void Ejecutar(CrearRecordatorioDto dto)
     {
-        if (!_repoUsuario.Existe(dto.IdUsuario))
-            throw new Exception("Usuario existe");
+        if (!_repoUsuario.Existe(dto.UsuarioId))
+            throw new Exception("Usuario no existe");
 
         var recordatorio = new Recordatorio(
             dto.Nombre,
             dto.Descripcion,
             dto.FechayHora,
-            dto.IdUsuario
+            dto.UsuarioId
             
         );
 

@@ -10,7 +10,7 @@ namespace AppDiaria.WebApi.Controllers.ControllersSeccionRutinas
     [ApiController]
     public class EntrenamientosController : ControllerBase
     {
-         private readonly AgregarEntrenamientoUseCase _agregar;
+        private readonly AgregarEntrenamientoUseCase _agregar;
         private readonly ListarEntrenamientoUseCase _listar;
         private readonly ModificarEntrenamientoUseCase _modificar;
         private readonly EliminarEntrenamientoUseCase _eliminar;

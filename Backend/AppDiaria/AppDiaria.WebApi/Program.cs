@@ -19,8 +19,16 @@ builder.Services.AddSwaggerGen();
 ///controlador
 builder.Services.AddControllers();
 
-builder.Services.AddScoped<AppDiariaContext>();
-//UseCases
+/*builder.Services.AddScoped<AppDiariaContext>(); ya no se necesita porque ahora usamos migraciones
+builder.Services.AddDbContext<AppDiariaContext>(options =>
+    options.UseSqlite("Data Source=AppDiaria.sqlite")
+);*/
+builder.Services.AddDbContext<AppDiariaContext>(options =>
+    options.UseSqlite(
+        builder.Configuration.GetConnectionString("DefaultConnection")
+    )
+);
+
 
 
 
@@ -30,11 +38,7 @@ builder.Services.AddApplication(); //para el DI-container
 builder.Services.AddInfrastructure();
 
 
-/*builder.Services.AddDbContext<AppDiariaContext>(options =>
-    options.UseSqlite(
-        builder.Configuration.GetConnectionString("DefaultConnection")
-    )
-);*/
+
 
 
 

@@ -26,11 +26,17 @@ public class AgregarRutinaUseCase
         var rutina = new Rutina(
             dto.Nombre,
             dto.Dia,
-            dto.Descripcion
-            
+            dto.Descripcion,
+            dto.Ejercicios.Select(e =>
+                new Ejercicio(
+                    e.Nombre,
+                    e.Descripcion,
+                    e.Series,
+                    e.Repeticiones
+                )
+            ).ToList()
         );
-
-        if (!_validador.Validar(rutina, out var error))
+    if (!_validador.Validar(rutina, out var error))
             throw new Exception(error);
 
         _repo.CrearRutina(rutina);

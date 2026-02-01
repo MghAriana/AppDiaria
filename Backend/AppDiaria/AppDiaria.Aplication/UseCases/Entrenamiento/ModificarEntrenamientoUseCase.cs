@@ -2,6 +2,7 @@ using System;
 using AppDiaria.Aplication.DTOS.Entrenamientos;
 using AppDiaria.Aplication.Interfaces.InterfacesSeccionEntrenamientos;
 using AppDiaria.Aplication.Validadores.SeccionRutinas;
+using AppDiaria.Domain.Entidades.Rutinas;
 
 namespace AppDiaria.Aplication.UseCases.Entrenamiento;
 
@@ -20,15 +21,39 @@ public class ModificarEntrenamientoUseCase
     {
         var entrenamiento = _repo.ObtenerPorId(id);
         if (entrenamiento == null)
-            throw new Exception("Tarea no encontrada");
+            throw new Exception("Entrenamiento no encontrado");
 
         entrenamiento.Actualizar(
             dto.Nombre,
             dto.Fecha,
-            dto.IdUsuario
+            dto.UsuarioId
         );
 
-        if (_validador.Validar(entrenamiento, out var error))
+        if (dto.Rutinas != null)
+        {
+            entrenamiento.Rutinas.Clear();
+
+            foreach (var rutinaDto in dto.Rutinas)
+            {
+                var rutina = new Rutina(
+                    rutinaDto.Nombre,
+                    rutinaDto.Dia,
+                    rutinaDto.Descripcion,
+                    rutinaDto.Ejercicios.Select(e =>
+                        new Ejercicio(
+                            e.Nombre,
+                            e.Descripcion,
+                            e.Series,
+                            e.Repeticiones
+                        )
+                    ).ToList()
+                );
+
+                entrenamiento.AgregarRutina(rutina);
+            }
+        }
+
+        if (!_validador.Validar(entrenamiento, out var error))
             throw new Exception(error);
 
         _repo.ModificarEntrenamiento(entrenamiento);

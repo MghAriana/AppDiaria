@@ -11,5 +11,5 @@ public class TareaDto
     public String? Descripcion { get; set; }
     public DateTime FechaInicio { get; set; }
     public DateTime FechaFin { get; set; }
-    public int IdUsuario{get; set;}
+    public int UsuarioId{get; set;}
 }

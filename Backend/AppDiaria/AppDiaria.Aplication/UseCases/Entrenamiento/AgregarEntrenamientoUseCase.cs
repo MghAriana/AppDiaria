@@ -26,21 +26,40 @@ public class AgregarEntrenamientoUseCase
         _validador = validador;
     }
 
-    public void Ejecutar(CrearEntrenamientoDto dto)
+     public void Ejecutar(CrearEntrenamientoDto dto)
     {
-        if (!_repoUsuario.Existe(dto.IdUsuario))
+        if (!_repoUsuario.Existe(dto.UsuarioId))
             throw new Exception("Usuario no existe");
-        
-        var entrenamientos = new Domain.Entidades.Rutinas.Entrenamientos(
+
+        var entrenamiento = new Entrenamientos(
             dto.Nombre,
             dto.Fecha,
-            dto.IdUsuario
+            dto.UsuarioId
         );
 
-        if (!_validador.Validar(entrenamientos, out var error))
+        foreach (var rutinaDto in dto.Rutinas)
+        {
+            var rutina = new Rutina(
+                rutinaDto.Nombre,
+                rutinaDto.Dia,
+                rutinaDto.Descripcion,
+                rutinaDto.Ejercicios.Select(e =>
+                    new Ejercicio(
+                        e.Nombre,
+                        e.Descripcion,
+                        e.Series,
+                        e.Repeticiones
+                    )
+                ).ToList()
+            );
+
+            entrenamiento.AgregarRutina(rutina);
+        }
+
+        if (!_validador.Validar(entrenamiento, out var error))
             throw new Exception(error);
 
-        _repo.CrearEntrenamiento(entrenamientos);
+        _repo.CrearEntrenamiento(entrenamiento);
     }
 
 }
