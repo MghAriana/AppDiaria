@@ -11,7 +11,9 @@ public class Rutina
     public string? Nombre{get;set;}
     public string? Dia{get;set;}
     public string? Descripcion{get;set;}
+    public bool EsPredeterminada { get; private set; }
     public List<Ejercicio> Ejercicios{get;set;} 
+    public List<EntrenamientoRutina> EntrenamientoRutinas { get; private set; }
     /*public int DuracionTotal{get;set;} //creo que no hace fata la variable porque se puede saber por algun metodo que recorra la lista de ejercicios y vaya sumando cada punto
     public int CantidadEjercicios{get;set;}
     public int CaloriasPerdidas{get;set;}

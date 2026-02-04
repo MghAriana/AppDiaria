@@ -53,6 +53,7 @@ public static class InyeccionDependencias
         services.AddScoped<ListarEntrenamientoUseCase>();
         services.AddScoped<ModificarEntrenamientoUseCase>();
         services.AddScoped<EliminarEntrenamientoUseCase>();
+        services.AddScoped<ListarEntrenamientosPorFechaUseCase>();
         /// validadores
         services.AddScoped<ValidadorEjercicio>();
         services.AddScoped<ValidadorRutina>();

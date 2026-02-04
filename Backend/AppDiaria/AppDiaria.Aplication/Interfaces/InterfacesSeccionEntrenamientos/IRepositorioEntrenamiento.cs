@@ -10,5 +10,7 @@ public interface IRepositorioEntrenamiento
     public List<Entrenamientos> ListarEntrenamientos();
     public void ModificarEntrenamiento(Entrenamientos entrenamientos);
     public Entrenamientos ObtenerPorId(int id);
+    public void GuardarCambios();
+
 
 }

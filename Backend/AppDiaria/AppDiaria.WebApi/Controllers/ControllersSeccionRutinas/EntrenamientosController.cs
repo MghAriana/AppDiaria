@@ -14,17 +14,23 @@ namespace AppDiaria.WebApi.Controllers.ControllersSeccionRutinas
         private readonly ListarEntrenamientoUseCase _listar;
         private readonly ModificarEntrenamientoUseCase _modificar;
         private readonly EliminarEntrenamientoUseCase _eliminar;
+        private readonly ListarEntrenamientosPorFechaUseCase _listarporfecha;
+        private readonly AgregarRutinaAEntrenamientoUseCase _agregarRutina;
 
         public EntrenamientosController(
             AgregarEntrenamientoUseCase agregar,
             ListarEntrenamientoUseCase listar,
             ModificarEntrenamientoUseCase modificar,
-            EliminarEntrenamientoUseCase eliminar)
+            EliminarEntrenamientoUseCase eliminar,
+            ListarEntrenamientosPorFechaUseCase listarporfecha,
+            AgregarRutinaAEntrenamientoUseCase agregarRutinaA)
         {
             _agregar = agregar;
             _listar = listar;
             _modificar = modificar;
             _eliminar = eliminar;
+            _listarporfecha= listarporfecha;
+            _agregarRutina= agregarRutinaA;
         }
 
         [HttpGet]
@@ -32,6 +38,13 @@ namespace AppDiaria.WebApi.Controllers.ControllersSeccionRutinas
         {
             var entrenamientos = _listar.Ejecutar();
             return Ok(entrenamientos);
+        }
+        
+        [HttpGet("mes")]
+        public IActionResult ObtenerPorMes(DateOnly fecha)
+        {
+            var ejercicios = _listarporfecha.Ejecutar(fecha);
+            return Ok(ejercicios);
         }
 
         [HttpPost]
@@ -44,9 +57,11 @@ namespace AppDiaria.WebApi.Controllers.ControllersSeccionRutinas
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody] ActualizarEntrenamientoDto dto)
         {
-            _modificar.Ejecutar(id, dto);
+            dto.Id = id;
+            _modificar.Ejecutar(dto);
             return Ok();
         }
+
 
         [HttpDelete("{id}")]
         public IActionResult Eliminar(int id)
@@ -54,6 +69,17 @@ namespace AppDiaria.WebApi.Controllers.ControllersSeccionRutinas
             _eliminar.Ejecutar(id);
             return NoContent();
         }
+        
+        [HttpPost("{entrenamientoId}/rutinas")]
+        public IActionResult AgregarRutina(
+            int entrenamientoId,
+            [FromBody] AgregarRutinaAEntrenamientoDto dto)
+        {
+            _agregarRutina.Ejecutar(entrenamientoId, dto.RutinaId);
+            return Ok();
+        }
+
+
     }
 
 }

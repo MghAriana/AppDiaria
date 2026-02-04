@@ -17,46 +17,14 @@ public class ModificarEntrenamientoUseCase
         _validador = validador;
     }
 
-    public void Ejecutar(int id, ActualizarEntrenamientoDto dto)
-    {
-        var entrenamiento = _repo.ObtenerPorId(id);
-        if (entrenamiento == null)
-            throw new Exception("Entrenamiento no encontrado");
+   public void Ejecutar(ActualizarEntrenamientoDto dto)
+{
+    var entrenamiento = _repo.ObtenerPorId(dto.Id)
+        ?? throw new Exception("Entrenamiento no existe");
 
-        entrenamiento.Actualizar(
-            dto.Nombre,
-            dto.Fecha,
-            dto.UsuarioId
-        );
+    entrenamiento.Actualizar(dto.Nombre, dto.Fecha, dto.UsuarioId);
 
-        if (dto.Rutinas != null)
-        {
-            entrenamiento.Rutinas.Clear();
-
-            foreach (var rutinaDto in dto.Rutinas)
-            {
-                var rutina = new Rutina(
-                    rutinaDto.Nombre,
-                    rutinaDto.Dia,
-                    rutinaDto.Descripcion,
-                    rutinaDto.Ejercicios.Select(e =>
-                        new Ejercicio(
-                            e.Nombre,
-                            e.Descripcion,
-                            e.Series,
-                            e.Repeticiones
-                        )
-                    ).ToList()
-                );
-
-                entrenamiento.AgregarRutina(rutina);
-            }
-        }
-
-        if (!_validador.Validar(entrenamiento, out var error))
-            throw new Exception(error);
-
-        _repo.ModificarEntrenamiento(entrenamiento);
-    }
+    _repo.ModificarEntrenamiento(entrenamiento);
+}
 
 }
