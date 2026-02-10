@@ -12,8 +12,9 @@
     <Folder Include="DTOS\Usuario\" />
     <Folder Include="Interfaces\InterfacesSeccionEntrenamientos\" />
     <Folder Include="UseCases\Ejercicios\" />
-    <Folder Include="UseCases\Entrenamientos\" />
+    <Folder Include="UseCases\RutinaEjercicio\" />
     <Folder Include="UseCases\Rutinas\" />
+    <Folder Include="UseCases\Tareas\RutinaEjercicioUseCase\" />
     <Folder Include="Validadores\SeccionRutinas\" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0" />
   </ItemGroup>

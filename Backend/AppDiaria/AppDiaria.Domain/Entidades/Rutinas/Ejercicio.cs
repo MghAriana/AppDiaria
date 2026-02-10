@@ -4,37 +4,30 @@ using System.ComponentModel.DataAnnotations;
 namespace AppDiaria.Domain.Entidades.Rutinas;
 
 public class Ejercicio
-{ 
+{
     [Key]
-    public int Id {get; set;}
-    public String? Nombre{get;set;}
-    public String? Descripcion {get;set;}
-    public int Series{get;set;}
-    public int Repeticiones{get;set;}
-    public int CaloriasPerdidas{get;set;}
-    
-    //public List<video> Video {get;set;}
+    public int Id { get; private set; }
 
+    public string Nombre { get; private set; } = null!;
+    public string? Descripcion { get; private set; }
 
-    protected Ejercicio(){}
-    public Ejercicio(String? nombre, String? descripcion, int series, int repeticiones)
+    // Relacion con Rutina
+    public List<RutinaEjercicio> RutinaEjercicios { get; private set; } = new();
+
+    protected Ejercicio() { } // EF
+
+    public Ejercicio(string nombre, string? descripcion)
     {
-        Nombre =nombre;
+        if (string.IsNullOrWhiteSpace(nombre))
+            throw new Exception("El nombre del ejercicio es obligatorio");
+
+        Nombre = nombre;
         Descripcion = descripcion;
-        Series = series;
-        Repeticiones = repeticiones;
-        CaloriasPerdidas = 0;
-
     }
-    
 
-      public void Actualizar(string nombre, string descripcion, int series, int repeticiones)
+    public void Actualizar(string nombre, string? descripcion)
     {
-            Nombre = nombre;
-            Descripcion = descripcion;
-            Series = series;
-            Repeticiones = repeticiones;
-            
+        Nombre = nombre;
+        Descripcion = descripcion;
     }
-
 }

@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ignac\\Desktop\\AppDiaria\\Backend\\AppDiaria\\AppDiaria.Domain\\AppDiaria.Domain.csproj": {}
+    "C:\\Users\\churr\\OneDrive\\Escritorio\\App\\AppDiaria\\Backend\\AppDiaria\\AppDiaria.Domain\\AppDiaria.Domain.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ignac\\Desktop\\AppDiaria\\Backend\\AppDiaria\\AppDiaria.Domain\\AppDiaria.Domain.csproj": {
+    "C:\\Users\\churr\\OneDrive\\Escritorio\\App\\AppDiaria\\Backend\\AppDiaria\\AppDiaria.Domain\\AppDiaria.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ignac\\Desktop\\AppDiaria\\Backend\\AppDiaria\\AppDiaria.Domain\\AppDiaria.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\churr\\OneDrive\\Escritorio\\App\\AppDiaria\\Backend\\AppDiaria\\AppDiaria.Domain\\AppDiaria.Domain.csproj",
         "projectName": "AppDiaria.Domain",
-        "projectPath": "C:\\Users\\ignac\\Desktop\\AppDiaria\\Backend\\AppDiaria\\AppDiaria.Domain\\AppDiaria.Domain.csproj",
-        "packagesPath": "C:\\Users\\ignac\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ignac\\Desktop\\AppDiaria\\Backend\\AppDiaria\\AppDiaria.Domain\\obj\\",
+        "projectPath": "C:\\Users\\churr\\OneDrive\\Escritorio\\App\\AppDiaria\\Backend\\AppDiaria\\AppDiaria.Domain\\AppDiaria.Domain.csproj",
+        "packagesPath": "C:\\Users\\churr\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\churr\\OneDrive\\Escritorio\\App\\AppDiaria\\Backend\\AppDiaria\\AppDiaria.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\ignac\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\churr\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -37,7 +37,8 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        }
+        },
+        "SdkAnalysisLevel": "10.0.100"
       },
       "frameworks": {
         "net8.0": {
@@ -58,7 +59,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.407/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.101/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

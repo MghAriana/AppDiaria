@@ -27,9 +27,7 @@ public class AgregarEjercicioUseCase
     {
         var ejercicio = new Ejercicio(
             dto.Nombre,
-            dto.Descripcion,
-            dto.Series,
-            dto.Repeticiones
+            dto.Descripcion
         );
 
         if (!_validador.Validar(ejercicio, out var error))

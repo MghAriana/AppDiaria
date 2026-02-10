@@ -29,6 +29,11 @@ public class RepositorioRutina : IRepositorioRutina
         }
     }
 
+    public void GuardarCambios()
+    {
+        _context.SaveChanges();
+    }
+
     public List<Rutina> ListarRutinas()
     {
         return _context.Rutinas.ToList();

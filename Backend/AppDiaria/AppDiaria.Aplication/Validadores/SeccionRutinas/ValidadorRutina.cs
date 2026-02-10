@@ -1,18 +1,37 @@
 using System;
+using AppDiaria.Aplication.DTOS.Rutinas;
 using AppDiaria.Domain.Entidades.Rutinas;
 
 namespace AppDiaria.Aplication.Validadores.SeccionRutinas;
 
 public class ValidadorRutina
 {
-    public bool Validar(Rutina rutina , out string mensajeError)
+    public bool Validar(CrearRutinaDto dto, out string mensajeError)
     {
-        mensajeError="";
-        if(string.IsNullOrWhiteSpace(rutina.Nombre))
-            mensajeError+= "El campo nombre no puede estar vacio";
-        if(rutina.Ejercicios is null)
-            mensajeError+= "debe incluir al menos 1 ejercicio";
-        return mensajeError =="";
-    }
+        mensajeError = "";
 
+        if (string.IsNullOrWhiteSpace(dto.Nombre))
+            mensajeError += "El nombre de la rutina es obligatorio. ";
+
+        if (!Enum.IsDefined(typeof(DayOfWeek), dto.Dia))
+            mensajeError += "El día no es válido. ";
+
+
+        if (dto.Ejercicios == null || !dto.Ejercicios.Any())
+            mensajeError += "La rutina debe tener al menos un ejercicio. ";
+
+        return mensajeError == "";
+    }
+    public bool ValidarActualizacion(ActualizarRutinaDto dto, out string mensajeError)
+    {
+        mensajeError = "";
+
+        if (string.IsNullOrWhiteSpace(dto.Nombre))
+            mensajeError += "El nombre de la rutina es obligatorio. ";
+
+        if (!Enum.IsDefined(typeof(DayOfWeek), dto.Dia))
+            mensajeError += "El día no es válido. ";
+
+        return mensajeError == "";
+    }
 }

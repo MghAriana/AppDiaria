@@ -15,6 +15,8 @@ public class AppDiariaContext : DbContext
     public DbSet<Usuario> Usuarios { get; set; }
     public DbSet<Recordatorio> Recordatorios { get; set; }
     public DbSet<Rutina> Rutinas {get;set;}
+    public DbSet<RutinaEjercicio> RutinaEjercicios { get; set; }
+
     public DbSet<Entrenamientos> Entrenamientos {get;set;}
     public DbSet<EntrenamientoRutina> EntrenamientoRutinas{get;set;}
     public DbSet<Ejercicio> Ejercicios{get;set;}
@@ -35,6 +37,19 @@ public class AppDiariaContext : DbContext
         .HasOne(er => er.Rutina)
         .WithMany(r => r.EntrenamientoRutinas)
         .HasForeignKey(er => er.RutinaId);
+    //ejrercicios rutina
+     modelBuilder.Entity<RutinaEjercicio>()
+        .HasKey(re => new { re.RutinaId, re.EjercicioId });
+
+    modelBuilder.Entity<RutinaEjercicio>()
+        .HasOne(re => re.Rutina)
+        .WithMany(r => r.RutinaEjercicios)
+        .HasForeignKey(re => re.RutinaId);
+
+    modelBuilder.Entity<RutinaEjercicio>()
+        .HasOne(re => re.Ejercicio)
+        .WithMany(e => e.RutinaEjercicios)
+        .HasForeignKey(re => re.EjercicioId);
 }
 
 

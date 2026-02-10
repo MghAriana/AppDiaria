@@ -8,7 +8,7 @@ namespace AppDiaria.Aplication.UseCases.Rutinas;
 
 public class AgregarRutinaUseCase
 {
-     private readonly IRepositorioRutina _repo;
+    private readonly IRepositorioRutina _repo;
     private readonly ValidadorRutina _validador;
 
     public AgregarRutinaUseCase(
@@ -16,30 +16,22 @@ public class AgregarRutinaUseCase
         ValidadorRutina validador)
     {
         _repo = repo;
-        
         _validador = validador;
     }
 
-    public void Ejecutar(CrearRutinaDto dto)
+    public int Ejecutar(CrearRutinaDto dto)
     {
-    
+        if (!_validador.Validar(dto, out var error))
+            throw new Exception(error);
+
         var rutina = new Rutina(
             dto.Nombre,
             dto.Dia,
             dto.Descripcion,
-            dto.Ejercicios.Select(e =>
-                new Ejercicio(
-                    e.Nombre,
-                    e.Descripcion,
-                    e.Series,
-                    e.Repeticiones
-                )
-            ).ToList()
+            dto.EsPredeterminada
         );
-    if (!_validador.Validar(rutina, out var error))
-            throw new Exception(error);
 
         _repo.CrearRutina(rutina);
+        return rutina.Id;
     }
-
 }

@@ -23,9 +23,11 @@ public static class DependencyInjection
         services.AddScoped<IRepositorioUsuario, RepositorioUsuario>(); // cuando exista
         services.AddScoped<IRepositorioEjercicio, RepositorioEjercicio>();
         services.AddScoped<IRepositorioEntrenamiento, RepositorioEntrenamientos>();
+        services.AddScoped<IRepositorioRutina, RepositorioRutina>();
+        
+        ///usecases 
         services.AddScoped<AgregarRutinaAEntrenamientoUseCase, AgregarRutinaAEntrenamientoUseCase>();
 
-        services.AddScoped<IRepositorioRutina, RepositorioRutina>();
 
         return services;
     }

@@ -76,19 +76,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\ignac\\.nuget\\packages\\": {}
+    "C:\\Users\\churr\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ignac\\Desktop\\AppDiaria\\Backend\\AppDiaria\\AppDiaria.Aplication\\AppDiaria.Aplication.csproj",
+      "projectUniqueName": "C:\\Users\\churr\\OneDrive\\Escritorio\\App\\AppDiaria\\Backend\\AppDiaria\\AppDiaria.Aplication\\AppDiaria.Aplication.csproj",
       "projectName": "AppDiaria.Aplication",
-      "projectPath": "C:\\Users\\ignac\\Desktop\\AppDiaria\\Backend\\AppDiaria\\AppDiaria.Aplication\\AppDiaria.Aplication.csproj",
-      "packagesPath": "C:\\Users\\ignac\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ignac\\Desktop\\AppDiaria\\Backend\\AppDiaria\\AppDiaria.Aplication\\obj\\",
+      "projectPath": "C:\\Users\\churr\\OneDrive\\Escritorio\\App\\AppDiaria\\Backend\\AppDiaria\\AppDiaria.Aplication\\AppDiaria.Aplication.csproj",
+      "packagesPath": "C:\\Users\\churr\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\churr\\OneDrive\\Escritorio\\App\\AppDiaria\\Backend\\AppDiaria\\AppDiaria.Aplication\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\ignac\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\churr\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
@@ -100,8 +100,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\ignac\\Desktop\\AppDiaria\\Backend\\AppDiaria\\AppDiaria.Domain\\AppDiaria.Domain.csproj": {
-              "projectPath": "C:\\Users\\ignac\\Desktop\\AppDiaria\\Backend\\AppDiaria\\AppDiaria.Domain\\AppDiaria.Domain.csproj"
+            "C:\\Users\\churr\\OneDrive\\Escritorio\\App\\AppDiaria\\Backend\\AppDiaria\\AppDiaria.Domain\\AppDiaria.Domain.csproj": {
+              "projectPath": "C:\\Users\\churr\\OneDrive\\Escritorio\\App\\AppDiaria\\Backend\\AppDiaria\\AppDiaria.Domain\\AppDiaria.Domain.csproj"
             }
           }
         }
@@ -115,7 +115,8 @@
         "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "direct"
-      }
+      },
+      "SdkAnalysisLevel": "10.0.100"
     },
     "frameworks": {
       "net8.0": {
@@ -142,7 +143,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.407/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.101/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
