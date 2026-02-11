@@ -24,7 +24,7 @@ public class AppDiariaContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
 {
     base.OnModelCreating(modelBuilder);
-
+    // EntrenamientoRutina (clave compuesta)
     modelBuilder.Entity<EntrenamientoRutina>()
         .HasKey(er => new { er.EntrenamientoId, er.RutinaId });
 
@@ -37,10 +37,8 @@ public class AppDiariaContext : DbContext
         .HasOne(er => er.Rutina)
         .WithMany(r => r.EntrenamientoRutinas)
         .HasForeignKey(er => er.RutinaId);
-    //ejrercicios rutina
-     modelBuilder.Entity<RutinaEjercicio>()
-        .HasKey(re => new { re.RutinaId, re.EjercicioId });
 
+    // RutinaEjercico
     modelBuilder.Entity<RutinaEjercicio>()
         .HasOne(re => re.Rutina)
         .WithMany(r => r.RutinaEjercicios)

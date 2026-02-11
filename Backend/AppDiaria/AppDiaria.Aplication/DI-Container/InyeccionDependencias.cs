@@ -2,6 +2,7 @@ using System;
 using AppDiaria.Aplication.UseCases.Ejercicios;
 using AppDiaria.Aplication.UseCases.Entrenamiento;
 using AppDiaria.Aplication.UseCases.Recordatorios;
+using AppDiaria.Aplication.UseCases.RutinaEjercicio;
 using AppDiaria.Aplication.UseCases.Rutinas;
 using AppDiaria.Aplication.UseCases.Tareas;
 using AppDiaria.Aplication.UseCases.Usuarios;
@@ -15,7 +16,7 @@ public static class InyeccionDependencias
 {
        public static IServiceCollection AddApplication(this IServiceCollection services)
     {
-        // USECASES
+    //// USECASES////
         //  Tarea
         services.AddScoped<AgregarTareaUseCase>();
         services.AddScoped<ListarTareaUseCase>();
@@ -37,7 +38,8 @@ public static class InyeccionDependencias
         services.AddScoped<ValidadorTarea>();
         services.AddScoped<ValidadorUsuario>();
         services.AddScoped<ValidadorRecordatorio>();
-        /////////////////////////seccion Rutinas////////////
+
+        /////////////////////////SECCION RUTINAS////////////////////
         /// Rutina
         services.AddScoped<AgregarRutinaUseCase>();
         services.AddScoped<ListarRutinaUseCase>();
@@ -53,11 +55,20 @@ public static class InyeccionDependencias
         services.AddScoped<ListarEntrenamientoUseCase>();
         services.AddScoped<ModificarEntrenamientoUseCase>();
         services.AddScoped<EliminarEntrenamientoUseCase>();
+
         services.AddScoped<ListarEntrenamientosPorFechaUseCase>();
+        services.AddScoped<AgregarRutinaAEntrenamientoUseCase>();
+
+        /// RutinaEjercicio
+        services.AddScoped<AgregarEjercicioARutinaUseCase>();
+        services.AddScoped<ModificarSeriesYRepeticionesUseCase>();
+        services.AddScoped<QuitarEjercicioDeRutinaUseCase>();
+
         /// validadores
         services.AddScoped<ValidadorEjercicio>();
         services.AddScoped<ValidadorRutina>();
         services.AddScoped<ValidadorEntrenamiento>();
+        services.AddScoped<ValidadorRutinaEjercicio>();
 
         return services;
     }

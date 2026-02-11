@@ -33,19 +33,16 @@ public class RepositorioEjercicio:IRepositorioEjercicio
         return _context.Ejercicios.ToList();
     }
 
-    public void ModificarEjercicio(Ejercicio ejercicios)
+    public void ModificarEjercicio(Ejercicio ejercicio)
     {
-        var ejerciciosExistente = _context.Ejercicios.Find(ejercicios.Id);
-        if (ejerciciosExistente == null)
-        {
-            throw new Exception ();
-        }
-        ejerciciosExistente.Nombre= ejercicios.Nombre;
-        ejerciciosExistente.Descripcion=ejercicios.Descripcion;
-        ejerciciosExistente.Series = ejercicios.Series;
-        ejerciciosExistente.Repeticiones = ejercicios.Repeticiones;
-        
-         _context.SaveChanges();
+            var existente = _context.Ejercicios.Find(ejercicio.Id);
+
+        if (existente == null)
+            throw new Exception("Ejercicio no encontrado");
+
+        existente.Actualizar(ejercicio.Nombre, ejercicio.Descripcion);
+
+        _context.SaveChanges();
     }
     public Ejercicio? ObtenerPorId(int id)
     {

@@ -17,9 +17,6 @@ public class ValidadorRutina
             mensajeError += "El día no es válido. ";
 
 
-        if (dto.Ejercicios == null || !dto.Ejercicios.Any())
-            mensajeError += "La rutina debe tener al menos un ejercicio. ";
-
         return mensajeError == "";
     }
     public bool ValidarActualizacion(ActualizarRutinaDto dto, out string mensajeError)

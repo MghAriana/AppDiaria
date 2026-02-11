@@ -2,6 +2,7 @@ using System;
 using AppDiaria.Aplication.Interfaces.InterfacesSeccionEntrenamientos;
 using AppDiaria.Domain.Entidades.Rutinas;
 using AppDiaria.Infreaestructure.DB;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace AppDiaria.Infreaestructure.Repositorios.RepositoriosSeccionRutinas;
@@ -36,7 +37,10 @@ public class RepositorioRutina : IRepositorioRutina
 
     public List<Rutina> ListarRutinas()
     {
-        return _context.Rutinas.ToList();
+        return _context.Rutinas
+        .Include(r => r.RutinaEjercicios)
+        .ThenInclude(re => re.Ejercicio)
+        .ToList();
     }
 
     public void ModificarRutina(Rutina rutina)
@@ -54,6 +58,9 @@ public class RepositorioRutina : IRepositorioRutina
     }
     public Rutina? ObtnerPorId(int id)
     {
-        return _context.Rutinas.SingleOrDefault(rut => rut.Id == id);
+            return _context.Rutinas
+                .Include(r => r.RutinaEjercicios)
+                    .ThenInclude(re => re.Ejercicio)
+                .SingleOrDefault(r => r.Id == id);
     }
 }

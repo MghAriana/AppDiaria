@@ -25,8 +25,7 @@ public static class DependencyInjection
         services.AddScoped<IRepositorioEntrenamiento, RepositorioEntrenamientos>();
         services.AddScoped<IRepositorioRutina, RepositorioRutina>();
         
-        ///usecases 
-        services.AddScoped<AgregarRutinaAEntrenamientoUseCase, AgregarRutinaAEntrenamientoUseCase>();
+       
 
 
         return services;
