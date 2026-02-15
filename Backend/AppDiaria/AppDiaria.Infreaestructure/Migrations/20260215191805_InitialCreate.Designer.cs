@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AppDiaria.Infreaestructure.Migrations
 {
     [DbContext(typeof(AppDiariaContext))]
-    [Migration("20260211191549_Inicial")]
-    partial class Inicial
+    [Migration("20260215191805_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

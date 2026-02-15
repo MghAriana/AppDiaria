@@ -7,7 +7,6 @@
   <ItemGroup>
     <Folder Include="DTOS\Ejercicios\" />
     <Folder Include="DTOS\Recordatorio\" />
-    <Folder Include="DTOS\Rutinas\" />
     <Folder Include="DTOS\Tarea\" />
     <Folder Include="DTOS\Usuario\" />
     <Folder Include="Interfaces\InterfacesSeccionEntrenamientos\" />
