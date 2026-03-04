@@ -1,4 +1,6 @@
 using System;
+using AppDiaria.Aplication.DTOS.Ejercicios;
+using AppDiaria.Aplication.DTOS.Rutinas;
 using AppDiaria.Aplication.Interfaces.InterfacesSeccionEntrenamientos;
 using AppDiaria.Domain.Entidades.Rutinas;
 using AppDiaria.Infreaestructure.DB;
@@ -38,11 +40,10 @@ public class RepositorioRutina : IRepositorioRutina
     public List<Rutina> ListarRutinas()
     {
         return _context.Rutinas
-        .Include(r => r.RutinaEjercicios)
-        .ThenInclude(re => re.Ejercicio)
-        .ToList();
+            .Include(r => r.RutinaEjercicios)
+            .ThenInclude(re => re.Ejercicio)
+            .ToList();
     }
-
     public void ModificarRutina(Rutina rutina)
     {
         var rutinaExistente = _context.Rutinas.Find(rutina.Id);

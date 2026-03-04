@@ -10,7 +10,7 @@ public class Recordatorio
     public string? Nombre { get; set; }
     public string? Descripcion { get; set; }
     public DateTime FechayHora { get; set; }
-    public int IdUsuario {get;set;}
+    public int UsuarioId {get;set;}
     public Usuario? Usuario{get;set;}
 
     protected Recordatorio() { }//lo usa EntityFramework 
@@ -20,7 +20,7 @@ public class Recordatorio
         this.Nombre = nombre;
         this.Descripcion = descripcion;
         this.FechayHora = hora;
-        IdUsuario = idUsuario;
+        this.UsuarioId = idUsuario;
     }
     public void Actualizar(string nombre, string descripcion, DateTime Fyhora)
     {
