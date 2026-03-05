@@ -50,15 +50,22 @@ namespace AppDiaria.WebApi.Controllers
         public IActionResult Crear([FromBody] CrearUsuarioDto dto)
         {
             _crear.Ejecutar(dto);
-            return Ok("Usuario creado correctamente");
+            return Created("", "Usuario creado correctamente");
         }
 
         // DELETE api/usuario/5
         [HttpDelete("{id}")]
         public IActionResult Eliminar(int id)
         {
-            _eliminar.Ejecutar(id);
-            return NoContent();
+         try
+            {
+                _eliminar.Ejecutar(id);
+                return NoContent();
+            }
+            catch
+            {
+                return NotFound("Usuario no encontrado");
+            }
         }
     }
 }

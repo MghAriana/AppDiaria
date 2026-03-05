@@ -24,6 +24,7 @@ public class ListarEntrenamientoUseCase
             Id = e.Id,
             Nombre = e.Nombre,
             Fecha = e.Fecha,
+            UsuarioId= e.UsuarioId,
             Rutinas = e.EntrenamientoRutinas
                 .Select(er => new RutinaDto
                 {

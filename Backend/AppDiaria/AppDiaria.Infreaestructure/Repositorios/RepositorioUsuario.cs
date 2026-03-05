@@ -2,6 +2,7 @@ using System;
 using AppDiaria.Aplication.Interfaces;
 using AppDiaria.Domain.Entidades;
 using AppDiaria.Infreaestructure.DB;
+using Microsoft.EntityFrameworkCore;
 
 namespace AppDiaria.Infreaestructure.Repositorios;
 
@@ -56,9 +57,14 @@ public class RepositorioUsuario : IRepositorioUsuario
         _context.SaveChanges();
     }
 
-    public Usuario ObtenerUsuario(int id_Usuario)
+    public Usuario? ObtenerUsuario(int id)
     {
-       var usu = _context.Usuarios.Find(id_Usuario);
-        return usu!;
+        return _context.Usuarios
+            .Include(u => u.Tareas)
+            .Include(u => u.Recordatorios)
+            .Include(u => u.Entrenamientos)
+                .ThenInclude(e => e.EntrenamientoRutinas)
+                .ThenInclude(er => er.Rutina)
+            .FirstOrDefault(u => u.Id == id);
     }
 }
