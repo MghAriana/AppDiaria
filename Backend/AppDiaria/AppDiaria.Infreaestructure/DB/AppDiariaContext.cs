@@ -24,6 +24,12 @@ public class AppDiariaContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
 {
     base.OnModelCreating(modelBuilder);
+    //recordatorio
+    modelBuilder.Entity<Recordatorio>()
+    .HasOne(r => r.Usuario)
+    .WithMany(u => u.Recordatorios)
+    .HasForeignKey(r => r.UsuarioId);
+    
     // EntrenamientoRutina (clave compuesta)
     modelBuilder.Entity<EntrenamientoRutina>()
         .HasKey(er => new { er.EntrenamientoId, er.RutinaId });
