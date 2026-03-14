@@ -1,6 +1,6 @@
 using AppDiaria.Aplication.DTOS.Entrenamientos;
 using AppDiaria.Aplication.UseCases.Entrenamiento;
-
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,6 +8,8 @@ namespace AppDiaria.WebApi.Controllers.ControllersSeccionRutinas
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
+
     public class EntrenamientosController : ControllerBase
     {
         private readonly AgregarEntrenamientoUseCase _agregar;

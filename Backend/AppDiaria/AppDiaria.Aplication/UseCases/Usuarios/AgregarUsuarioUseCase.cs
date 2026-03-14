@@ -17,9 +17,11 @@ public class AgregarUsuarioUseCase
 
     public void Ejecutar(CrearUsuarioDto dto)
     {
+        var passwordHash = BCrypt.Net.BCrypt.HashPassword(dto.Contraseña);
         var usuario = new Usuario(
             dto.Nombre,
-            dto.Email
+            dto.Email,
+            passwordHash
         );
 
         _repo.AgregarUsuario(usuario);

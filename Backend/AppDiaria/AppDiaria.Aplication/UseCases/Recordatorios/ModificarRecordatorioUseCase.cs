@@ -15,18 +15,22 @@ public class ModificarRecordatorioUseCase
         _repo= repo;
         _validador = validador;
     } 
-    public void Ejecutar(int id, ActualizarRecordatorioDto dto)
+    public void Ejecutar(int id, int usuarioId, ActualizarRecordatorioDto dto)
     {
+
         var rec = _repo.ObtenerId(id);
-        if(rec == null)
-          throw new Exception("Recordatorio invalido ");  
+         
+         if (rec == null)
+            throw new Exception("Recordatorio no encontrado");
+
+        if (rec.UsuarioId != usuarioId)
+            throw new Exception("No autorizado");
         
         rec.Actualizar(
             dto.Nombre,
             dto.Descripcion,
-            dto.FechayHora
+            dto.FechayHora );
             
-        );
         if (!_validador.Validador(rec, out string MensajeError))
         {
             throw new Exception(MensajeError);

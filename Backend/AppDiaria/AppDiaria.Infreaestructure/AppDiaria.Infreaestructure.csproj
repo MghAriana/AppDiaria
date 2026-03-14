@@ -6,15 +6,19 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.3.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.8" />
      <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.8">
       <PrivateAssets>all</PrivateAssets>
-    </PackageReference>  
+    </PackageReference>
+     <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="8.16.0" />
+     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.16.0" />  
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="DB\scripts\" />
+    <Folder Include="Services\" />
   </ItemGroup>
 
   <PropertyGroup>

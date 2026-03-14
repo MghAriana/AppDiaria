@@ -6,6 +6,7 @@ using AppDiaria.Aplication.UseCases.RutinaEjercicio;
 using AppDiaria.Aplication.UseCases.Rutinas;
 using AppDiaria.Aplication.UseCases.Tareas;
 using AppDiaria.Aplication.UseCases.Usuarios;
+using AppDiaria.Aplication.UseCases.Usuarios.Login;
 using AppDiaria.Aplication.Validadores;
 using AppDiaria.Aplication.Validadores.SeccionRutinas;
 using Microsoft.Extensions.DependencyInjection;
@@ -33,6 +34,7 @@ public static class InyeccionDependencias
         services.AddScoped<ModificarUsuarioUseCase>();
         services.AddScoped<EliminarUsuarioUseCase>();
         services.AddScoped<ObtenerUsuarioUseCase>();
+        services.AddScoped<LoginUseCase>();
         
         // Validadores
         services.AddScoped<ValidadorTarea>();

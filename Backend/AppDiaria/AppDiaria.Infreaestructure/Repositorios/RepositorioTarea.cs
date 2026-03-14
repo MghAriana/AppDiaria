@@ -29,9 +29,11 @@ public class RepositorioTarea : IRepositorioTarea
         }
     }
 
-    public List<Tarea> ListarTareas()
+    public List<Tarea> ListarTareas(int usuarioId)
     {
-        return _context.Tareas.ToList();
+        return _context.Tareas
+            .Where(t => t.UsuarioId == usuarioId)
+            .ToList();
     }
 
     public void ModificarTarea(Tarea tarea)

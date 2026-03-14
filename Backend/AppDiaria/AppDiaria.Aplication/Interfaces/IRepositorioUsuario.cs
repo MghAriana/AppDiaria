@@ -12,4 +12,5 @@ public interface IRepositorioUsuario
     public Usuario ObtenerUsuario(int id_Usuario);
     public bool ExisteEmail(string email);
     bool Existe(int idUsuario);
+    Usuario ObtenerPorEmail(string email);
 }

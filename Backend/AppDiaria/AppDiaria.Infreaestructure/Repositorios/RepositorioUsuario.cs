@@ -57,7 +57,12 @@ public class RepositorioUsuario : IRepositorioUsuario
         _context.SaveChanges();
     }
 
-    public Usuario? ObtenerUsuario(int id)
+    public Usuario ObtenerPorEmail(string email)
+    {
+        return _context.Usuarios.FirstOrDefault(u => u.Email == email)!;
+    }
+
+    public Usuario ObtenerUsuario(int id)
     {
         return _context.Usuarios
             .Include(u => u.Tareas)
@@ -65,6 +70,6 @@ public class RepositorioUsuario : IRepositorioUsuario
             .Include(u => u.Entrenamientos)
                 .ThenInclude(e => e.EntrenamientoRutinas)
                 .ThenInclude(er => er.Rutina)
-            .FirstOrDefault(u => u.Id == id);
+            .FirstOrDefault(u => u.Id == id)!;
     }
 }

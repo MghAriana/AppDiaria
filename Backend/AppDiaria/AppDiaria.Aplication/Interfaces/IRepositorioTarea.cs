@@ -6,7 +6,7 @@ namespace AppDiaria.Aplication.Interfaces;
 public interface IRepositorioTarea
 {
     public void CrearTarea(Tarea tarea);
-    public List<Tarea> ListarTareas();
+    public List<Tarea> ListarTareas(int usuarioId);
    void EliminarTarea(int id);
 
     public void ModificarTarea(Tarea tarea);

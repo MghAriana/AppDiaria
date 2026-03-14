@@ -34,9 +34,11 @@ public class RepositorioRecordatorio : IRepositorioRecordatorio
         _context.SaveChanges();
     }
 
-    public List<Recordatorio> ListarRecordatorios()
+   public List<Recordatorio> ListarRecordatorios(int usuarioId)
     {
-        return _context.Recordatorios.ToList();
+        return _context.Recordatorios
+            .Where(r => r.UsuarioId == usuarioId)
+            .ToList();
     }
 
     public void ModificarRecordatorio(Recordatorio recordatorio)

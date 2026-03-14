@@ -6,22 +6,16 @@ using AppDiaria.Domain.Entidades;
 
 namespace AppDiaria.Aplication.UseCases.Tareas;
 
-public class ModificarTareaUseCase
+public class ModificarTareaUseCase(IRepositorioTarea repo, ValidadorTarea validador)
 {
-    private readonly IRepositorioTarea _repo;
-    private readonly ValidadorTarea _validador;
-
-    public ModificarTareaUseCase(IRepositorioTarea repo, ValidadorTarea validador)
+    
+    public void Ejecutar(int id,int usuarioId, ActualizarTareaDto dto)
     {
-        _repo = repo;
-        _validador = validador;
-    }
-
-    public void Ejecutar(int id, ActualizarTareaDto dto)
-    {
-        var tarea = _repo.ObtenerPorId(id);
+        var tarea = repo.ObtenerPorId(id);
         if (tarea == null)
             throw new Exception("Tarea no encontrada");
+        if (tarea.UsuarioId != usuarioId)
+            throw new Exception("No autorizado");
 
         tarea.Actualizar(
             dto.Nombre,
@@ -30,10 +24,10 @@ public class ModificarTareaUseCase
             dto.FechaFin
         );
 
-        if (_validador.Validar(tarea, out var error))
+        if (validador.Validar(tarea, out var error))
             throw new Exception(error);
 
-        _repo.ModificarTarea(tarea);
+        repo.ModificarTarea(tarea);
     }
 }
 
