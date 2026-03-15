@@ -7,10 +7,12 @@ public interface IRepositorioEntrenamiento
 {
     public void CrearEntrenamiento(Entrenamientos entrenamientos);
     public void EliminarEntrenamiento(int id);
-    public List<Entrenamientos> ListarEntrenamientos();
     public void ModificarEntrenamiento(Entrenamientos entrenamientos);
     public Entrenamientos ObtenerPorId(int id);
     public void GuardarCambios();
+    List<Entrenamientos> ListarEntrenamientos(int usuarioId);
+
+    List<Entrenamientos> ListarPorMes(int usuarioId, DateOnly fecha);
 
 
 }

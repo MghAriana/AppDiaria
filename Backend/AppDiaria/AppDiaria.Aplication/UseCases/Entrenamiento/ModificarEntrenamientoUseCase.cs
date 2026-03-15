@@ -1,6 +1,7 @@
 using System;
 using AppDiaria.Aplication.DTOS.Entrenamientos;
 using AppDiaria.Aplication.Interfaces.InterfacesSeccionEntrenamientos;
+using AppDiaria.Aplication.Interfaces.Login;
 using AppDiaria.Aplication.Validadores.SeccionRutinas;
 using AppDiaria.Domain.Entidades.Rutinas;
 
@@ -10,21 +11,29 @@ public class ModificarEntrenamientoUseCase
 {
     private readonly IRepositorioEntrenamiento _repo;
     private readonly ValidadorEntrenamiento _validador;
+    private readonly ICurrentUserService _currentUser;
 
-    public ModificarEntrenamientoUseCase(IRepositorioEntrenamiento repo, ValidadorEntrenamiento validador)
+    public ModificarEntrenamientoUseCase(IRepositorioEntrenamiento repo, ValidadorEntrenamiento validador, ICurrentUserService currentUser)
     {
         _repo = repo;
         _validador = validador;
+        _currentUser = currentUser;
     }
 
-   public void Ejecutar(ActualizarEntrenamientoDto dto)
+   public void Ejecutar(int id, ActualizarEntrenamientoDto dto)
 {
-    var entrenamiento = _repo.ObtenerPorId(dto.Id)
-        ?? throw new Exception("Entrenamiento no existe");
+    var entrenamiento = _repo.ObtenerPorId(id)
+            ?? throw new Exception("Entrenamiento no existe");
 
-    entrenamiento.Actualizar(dto.Nombre, dto.Fecha, dto.UsuarioId);
+        if (entrenamiento.UsuarioId != _currentUser.UsuarioId)
+            throw new Exception("No autorizado");
 
-    _repo.ModificarEntrenamiento(entrenamiento);
+        entrenamiento.Actualizar(dto.Nombre, dto.Fecha);
+
+        if (!_validador.Validar(entrenamiento, out var error))
+            throw new Exception(error);
+
+        _repo.ModificarEntrenamiento(entrenamiento);
 }
 
 }

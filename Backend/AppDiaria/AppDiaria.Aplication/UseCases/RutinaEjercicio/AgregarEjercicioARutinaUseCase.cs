@@ -27,20 +27,21 @@ public class AgregarEjercicioARutinaUseCase
         var rutina = _repoRutina.ObtnerPorId(dto.RutinaId)
             ?? throw new Exception("Rutina no existe");
 
-        foreach (var e in dto.Ejercicios)
-        {
-            if (!_validador.Validar(e.Series, e.Repeticiones, out var error))
-        throw new Exception(error);
-            var ejercicio = _repoEjercicio.ObtenerPorId(e.EjercicioId)
-                ?? throw new Exception("Ejercicio no existe");
+       foreach (var e in dto.Ejercicios)
+    {
+        if (!_validador.Validar(e.Series, e.Repeticiones, out var error))
+            throw new Exception(error);
 
-            rutina.AgregarEjercicio(
-                ejercicio,
-                e.Series,
-                e.Repeticiones
-            );
-        }
+        var ejercicio = _repoEjercicio.ObtenerPorId(e.EjercicioId)
+            ?? throw new Exception("Ejercicio no existe");
 
+        rutina.AgregarEjercicio(
+            ejercicio,
+            e.Series,
+            e.Repeticiones,
+            e.CaloriasPorRepeticion
+        );
+    }
         _repoRutina.GuardarCambios();
     }
 

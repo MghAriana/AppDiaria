@@ -1,4 +1,5 @@
 using AppDiaria.Aplication.DTOS.Entrenamientos;
+using AppDiaria.Aplication.Interfaces.Login;
 using AppDiaria.Aplication.UseCases.Entrenamiento;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -18,6 +19,7 @@ namespace AppDiaria.WebApi.Controllers.ControllersSeccionRutinas
         private readonly EliminarEntrenamientoUseCase _eliminar;
         private readonly ListarEntrenamientosPorFechaUseCase _listarporfecha;
         private readonly AgregarRutinaAEntrenamientoUseCase _agregarRutina;
+        private readonly ICurrentUserService _currentUser;
 
         public EntrenamientosController(
             AgregarEntrenamientoUseCase agregar,
@@ -25,7 +27,9 @@ namespace AppDiaria.WebApi.Controllers.ControllersSeccionRutinas
             ModificarEntrenamientoUseCase modificar,
             EliminarEntrenamientoUseCase eliminar,
             ListarEntrenamientosPorFechaUseCase listarporfecha,
-            AgregarRutinaAEntrenamientoUseCase agregarRutinaA)
+            AgregarRutinaAEntrenamientoUseCase agregarRutinaA,
+            ICurrentUserService currentUser
+            )
         {
             _agregar = agregar;
             _listar = listar;
@@ -33,6 +37,7 @@ namespace AppDiaria.WebApi.Controllers.ControllersSeccionRutinas
             _eliminar = eliminar;
             _listarporfecha= listarporfecha;
             _agregarRutina= agregarRutinaA;
+            _currentUser = currentUser;
         }
 
         [HttpGet]
@@ -45,13 +50,14 @@ namespace AppDiaria.WebApi.Controllers.ControllersSeccionRutinas
         [HttpGet("mes")]
         public IActionResult ObtenerPorMes(DateOnly fecha)
         {
-            var ejercicios = _listarporfecha.Ejecutar(fecha);
-            return Ok(ejercicios);
+            var entrenamientos = _listarporfecha.Ejecutar(fecha);
+            return Ok(entrenamientos);
         }
 
         [HttpPost]
         public IActionResult Crear([FromBody] CrearEntrenamientoDto dto)
         {
+            var usuarioId = _currentUser.UsuarioId!.Value;
             _agregar.Ejecutar(dto);
             return Ok();
         }
@@ -59,8 +65,7 @@ namespace AppDiaria.WebApi.Controllers.ControllersSeccionRutinas
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody] ActualizarEntrenamientoDto dto)
         {
-            dto.Id = id;
-            _modificar.Ejecutar(dto);
+           _modificar.Ejecutar(id, dto);
             return Ok();
         }
 
@@ -77,6 +82,7 @@ namespace AppDiaria.WebApi.Controllers.ControllersSeccionRutinas
             int entrenamientoId,
             [FromBody] AgregarRutinaAEntrenamientoDto dto)
         {
+            var usuarioId = _currentUser.UsuarioId!.Value;
             _agregarRutina.Ejecutar(entrenamientoId, dto.RutinaId);
             return Ok();
         }

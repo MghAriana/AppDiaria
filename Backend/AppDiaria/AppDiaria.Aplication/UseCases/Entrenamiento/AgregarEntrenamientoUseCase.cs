@@ -2,6 +2,7 @@ using System;
 using AppDiaria.Aplication.DTOS.Entrenamientos;
 using AppDiaria.Aplication.Interfaces;
 using AppDiaria.Aplication.Interfaces.InterfacesSeccionEntrenamientos;
+using AppDiaria.Aplication.Interfaces.Login;
 using AppDiaria.Aplication.Validadores.SeccionRutinas;
 using AppDiaria.Domain.Entidades.Rutinas;
 
@@ -13,28 +14,34 @@ public class AgregarEntrenamientoUseCase
     private readonly IRepositorioEntrenamiento _repo;
     private readonly IRepositorioUsuario _repoUsuario;
     private readonly ValidadorEntrenamiento _validador;
+    private readonly ICurrentUserService _currentUser;
     
 
     public AgregarEntrenamientoUseCase(
         IRepositorioEntrenamiento repo,
         IRepositorioUsuario repoUsuario,
-        ValidadorEntrenamiento validador
+        ValidadorEntrenamiento validador,
+        ICurrentUserService currentUser
         )
     {
         _repo = repo;
         _repoUsuario = repoUsuario;
         _validador = validador;
+        _currentUser = currentUser;
+
     }
 
     public void Ejecutar(CrearEntrenamientoDto dto)
     {
-        if (!_repoUsuario.Existe(dto.UsuarioId))
+        var usuarioId = _currentUser.UsuarioId!.Value;
+
+        if (!_repoUsuario.Existe(usuarioId))
             throw new Exception("Usuario no existe");
 
         var entrenamiento = new Entrenamientos(
             dto.Nombre,
             dto.Fecha,
-            dto.UsuarioId
+            usuarioId
         );
 
         if (!_validador.Validar(entrenamiento, out var error))

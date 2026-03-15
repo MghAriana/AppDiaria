@@ -11,7 +11,7 @@ public class EntrenamientoDto
     public int Id{get; set;}
     public string? Nombre{get;set;}
     public DateOnly Fecha{get;set;}
-    public List<RutinaDto> Rutinas { get; set; } = new();
+    public List<EntrenamientoRutinaDto> Rutinas { get; set; } = new();
     public int UsuarioId{get;set;}
 
 }

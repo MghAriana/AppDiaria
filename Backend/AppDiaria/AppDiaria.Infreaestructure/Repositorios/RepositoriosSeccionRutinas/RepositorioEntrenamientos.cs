@@ -22,45 +22,41 @@ public class RepositorioEntrenamientos:IRepositorioEntrenamiento
 
     public void EliminarEntrenamiento(int id)
     {
-        var entrenamientosEliminar = _context.Entrenamientos.Where(rut => rut.Id == id).SingleOrDefault();
+        var entrenamientosEliminar = _context.Entrenamientos.Find(id);
         if (entrenamientosEliminar != null)
         {
-            _context.Remove(entrenamientosEliminar);
+            _context.Entrenamientos.Remove(entrenamientosEliminar);
             _context.SaveChanges();
         }
     }
 
-    public List<Entrenamientos> ListarEntrenamientos()
+   public List<Entrenamientos> ListarEntrenamientos(int usuarioId)
     {
-       return _context.Entrenamientos
-        .Include(e => e.EntrenamientoRutinas)
-            .ThenInclude(er => er.Rutina)
-        .ToList();
+        return _context.Entrenamientos
+            .Include(e => e.EntrenamientoRutinas)
+                .ThenInclude(er => er.Rutina)
+            .Where(e => e.UsuarioId == usuarioId)
+            .ToList();
     }
     
-    public List<Entrenamientos> ListarPorMes(DateOnly fecha)
+    public List<Entrenamientos> ListarPorMes(int usuarioId, DateOnly fecha)
     {
         var inicio = new DateOnly(fecha.Year, fecha.Month, 1);
         var fin = inicio.AddMonths(1);
 
         return _context.Entrenamientos
             .Include(e => e.EntrenamientoRutinas)
-            .Where(e => e.Fecha >= inicio && e.Fecha < fin)
+                .ThenInclude(er => er.Rutina)
+            .Where(e => e.UsuarioId == usuarioId &&
+                        e.Fecha >= inicio &&
+                        e.Fecha < fin)
             .ToList();
     }
     
-    public void ModificarEntrenamiento(Entrenamientos entrenamientos)
+    public void ModificarEntrenamiento(Entrenamientos entrenamiento)
     {
-        var entrenamientosExistente = _context.Entrenamientos.Find(entrenamientos.Id);
-        if (entrenamientosExistente == null)
-        {
-            throw new Exception ();
-        }
-        entrenamientosExistente.Nombre= entrenamientos.Nombre;
-        entrenamientosExistente.Fecha=entrenamientos.Fecha;
-        entrenamientosExistente.UsuarioId=entrenamientos.UsuarioId;
-
-         _context.SaveChanges();
+        _context.Entrenamientos.Update(entrenamiento);
+        _context.SaveChanges();
     }
     public Entrenamientos? ObtenerPorId(int id)
     {

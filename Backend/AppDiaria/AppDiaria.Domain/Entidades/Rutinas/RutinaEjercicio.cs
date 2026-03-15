@@ -16,11 +16,11 @@ public class RutinaEjercicio
 
     public int Series { get; private set; }
     public int Repeticiones { get; private set; }
-    public int CaloriasPorRepeticion { get; private set; }
+    public int CaloriasPorRepeticion { get; set; }
 
     protected RutinaEjercicio() { } 
 
-    public RutinaEjercicio(Rutina rutina,Ejercicio ejercicio,int series, int repeticiones)
+    public RutinaEjercicio(Rutina rutina,Ejercicio ejercicio,int series, int repeticiones, int caloriasPorRepeticion)
     {
         if (series < 1)
             throw new Exception("Debe tener al menos 1 serie");
@@ -34,6 +34,8 @@ public class RutinaEjercicio
         EjercicioId = ejercicio.Id;
         Series = series;
         Repeticiones = repeticiones;
+        CaloriasPorRepeticion = caloriasPorRepeticion;
+        
     }
 
     public void Actualizar(int series, int repeticiones)

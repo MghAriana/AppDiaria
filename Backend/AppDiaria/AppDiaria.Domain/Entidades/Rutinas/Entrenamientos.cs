@@ -9,17 +9,17 @@
         [Key]
         public int Id{get; set;}
         public string? Nombre{get;set;}
-        public DateOnly Fecha{get;set;}
-        public List<EntrenamientoRutina> EntrenamientoRutinas { get; set; } = new(); //mas adelante ver si es ICollection
-        public int UsuarioId{get;set;}
+        public DateOnly Fecha{get;private set;}
+        public ICollection<EntrenamientoRutina> EntrenamientoRutinas { get; private set; } = new List<EntrenamientoRutina>();//mas adelante ver si es ICollection
+        public int UsuarioId{get;private set;}
         public Usuario? Usuario{get;set;}
 
         protected Entrenamientos(){}//ef
-        public Entrenamientos(string nombre, DateOnly fecha, int UsuarioId)
+        public Entrenamientos(string nombre, DateOnly fecha, int usuarioId)
         {
             Nombre= nombre;
             Fecha=fecha;
-            this.UsuarioId=UsuarioId;
+            this.UsuarioId=usuarioId;
         }
         
         public void AgregarRutina(Rutina rutina)
@@ -32,11 +32,10 @@
             );
         }
 
-        public void Actualizar(string nombre, DateOnly fecha, int id)
+        public void Actualizar(string nombre, DateOnly fecha)
         {
             Nombre= nombre;
             Fecha=fecha;
-            UsuarioId=id;
         }
 
     }
