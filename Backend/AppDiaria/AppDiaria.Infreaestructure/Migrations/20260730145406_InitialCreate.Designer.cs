@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AppDiaria.Infreaestructure.Migrations
 {
     [DbContext(typeof(AppDiariaContext))]
-    [Migration("20260215191805_InitialCreate")]
+    [Migration("20260730145406_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -32,13 +32,10 @@ namespace AppDiaria.Infreaestructure.Migrations
                     b.Property<DateTime>("FechayHora")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("IdUsuario")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("Nombre")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("UsuarioId")
+                    b.Property<int>("UsuarioId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
@@ -119,6 +116,7 @@ namespace AppDiaria.Infreaestructure.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Nombre")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -201,6 +199,10 @@ namespace AppDiaria.Infreaestructure.Migrations
                     b.Property<string>("Nombre")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("PasswordHash")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.HasKey("Id");
 
                     b.ToTable("Usuarios");
@@ -210,7 +212,9 @@ namespace AppDiaria.Infreaestructure.Migrations
                 {
                     b.HasOne("AppDiaria.Domain.Entidades.Usuario", "Usuario")
                         .WithMany("Recordatorios")
-                        .HasForeignKey("UsuarioId");
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Usuario");
                 });
