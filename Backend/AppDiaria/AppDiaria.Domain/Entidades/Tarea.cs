@@ -15,8 +15,8 @@ public class Tarea
     public DateTime FechaInicio{get;set;}
     public DateTime FechaFin{get;set;}
     private Estado _estado;
-    public int IdUsuario{get;private set;}
-
+    public int UsuarioId{get;private set;}
+    public Usuario? Usuario{get;set;}
 
     public Tarea( string nombre, string descripcion,/*0List<Item> lista ,*/ DateTime inicio, DateTime duracion,int idUsuario)
     {
@@ -26,7 +26,7 @@ public class Tarea
        // this._item = lista;
         this.FechaInicio = inicio; //DateTime.Today;
         this.FechaFin = duracion;
-        this.IdUsuario= idUsuario;
+        this.UsuarioId= idUsuario;
         this._estado = Estado.Pendiente;
     }
     //contructor vacio para EntityFramework

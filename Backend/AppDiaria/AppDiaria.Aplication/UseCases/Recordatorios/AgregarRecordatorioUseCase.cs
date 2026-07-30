@@ -10,30 +10,27 @@ namespace AppDiaria.Aplication.UseCases.Recordatorios;
 public class AgregarRecordatorioUseCase 
 {
     private readonly IRepositorioRecordatorio _repo;
-    private readonly IRepositorioUsuario _repoUsuario;
+   
     private readonly ValidadorRecordatorio _validador;
 
     public AgregarRecordatorioUseCase(
             IRepositorioRecordatorio repo,
-            IRepositorioUsuario repoUs,
             ValidadorRecordatorio validador
     )
     {
         _repo = repo;
-        _repoUsuario= repoUs;
+        
         _validador = validador;
     }
-    public void Ejecutar(CrearRecordatorioDto dto)
+    public void Ejecutar(CrearRecordatorioDto dto, int usuarioId)
     {
-        if (!_repoUsuario.Existe(dto.IdUsuario))
-            throw new Exception("Usuario existe");
+
 
         var recordatorio = new Recordatorio(
             dto.Nombre,
             dto.Descripcion,
             dto.FechayHora,
-            dto.IdUsuario
-            
+            usuarioId
         );
 
         if (!_validador.Validador(recordatorio, out var error))

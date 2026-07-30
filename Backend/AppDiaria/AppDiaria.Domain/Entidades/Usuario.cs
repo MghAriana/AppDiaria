@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using AppDiaria.Domain.Entidades.Rutinas;
 
 namespace AppDiaria.Domain.Entidades;
 
@@ -8,18 +9,21 @@ public class Usuario
     public int Id { get; set; }
     public string? Nombre { get; set; }
     public string? Email { get; set; }
-  //  public string? Contraseña { get; set; }
+    public string PasswordHash { get; private set; } = string.Empty;
     public DateTime FechaCreacion {get;private set;}
     //aca deberia haber una lista de permisos de usuario
+    public List<Tarea> Tareas { get; set; } = new();
+    public List<Recordatorio> Recordatorios { get; set; } = new();
+    public List<Entrenamientos> Entrenamientos { get; set; } = new();
 
     public Usuario() { }
 
-    public Usuario( string nombre, string email)
+    public Usuario( string nombre, string email,string passwordHash)
     {
 
         Nombre = nombre;
         Email = email;
-        //Contraseña = contraseña;
+        PasswordHash = passwordHash;
         FechaCreacion= DateTime.UtcNow;
     }
     public void Actualizar(string nombre,string email)

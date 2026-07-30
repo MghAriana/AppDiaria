@@ -5,10 +5,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DTOS\" />
+    <Folder Include="DTOS\Ejercicios\" />
     <Folder Include="DTOS\Recordatorio\" />
     <Folder Include="DTOS\Tarea\" />
-    <Folder Include="DTOS\Usuario\" />
+    <Folder Include="Interfaces\InterfacesSeccionEntrenamientos\" />
+    <Folder Include="UseCases\Ejercicios\" />
+    <Folder Include="UseCases\RutinaEjercicio\" />
+    <Folder Include="UseCases\Rutinas\" />
+    <Folder Include="UseCases\Tareas\RutinaEjercicioUseCase\" />
+    <Folder Include="UseCases\Usuarios\Login\" />
+    <Folder Include="Validadores\SeccionRutinas\" />
+    <PackageReference Include="BCrypt.Net-Next" Version="4.1.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0" />
   </ItemGroup>
 

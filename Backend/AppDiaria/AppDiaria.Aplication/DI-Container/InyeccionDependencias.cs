@@ -1,8 +1,14 @@
 using System;
+using AppDiaria.Aplication.UseCases.Ejercicios;
+using AppDiaria.Aplication.UseCases.Entrenamiento;
 using AppDiaria.Aplication.UseCases.Recordatorios;
+using AppDiaria.Aplication.UseCases.RutinaEjercicio;
+using AppDiaria.Aplication.UseCases.Rutinas;
 using AppDiaria.Aplication.UseCases.Tareas;
 using AppDiaria.Aplication.UseCases.Usuarios;
+using AppDiaria.Aplication.UseCases.Usuarios.Login;
 using AppDiaria.Aplication.Validadores;
+using AppDiaria.Aplication.Validadores.SeccionRutinas;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace AppDiaria.Aplication.DI_Container;
@@ -11,7 +17,7 @@ public static class InyeccionDependencias
 {
        public static IServiceCollection AddApplication(this IServiceCollection services)
     {
-        // USECASES
+    //// USECASES////
         //  Tarea
         services.AddScoped<AgregarTareaUseCase>();
         services.AddScoped<ListarTareaUseCase>();
@@ -28,11 +34,43 @@ public static class InyeccionDependencias
         services.AddScoped<ModificarUsuarioUseCase>();
         services.AddScoped<EliminarUsuarioUseCase>();
         services.AddScoped<ObtenerUsuarioUseCase>();
+        services.AddScoped<LoginUseCase>();
         
         // Validadores
         services.AddScoped<ValidadorTarea>();
         services.AddScoped<ValidadorUsuario>();
         services.AddScoped<ValidadorRecordatorio>();
+
+        /////////////////////////SECCION RUTINAS////////////////////
+        /// Rutina
+        services.AddScoped<AgregarRutinaUseCase>();
+        services.AddScoped<ListarRutinaUseCase>();
+        services.AddScoped<ModificarRutinaUseCase>();
+        services.AddScoped<EliminarRutinaUseCase>();
+        /// Ejercicio
+        services.AddScoped<AgregarEjercicioUseCase>();
+        services.AddScoped<ListarEjercicioUseCase>();
+        services.AddScoped<EliminarEjercicioUseCase>();
+        services.AddScoped<ModificarEjercicioUseCase>();
+        /// Entrenamiento
+        services.AddScoped<AgregarEntrenamientoUseCase>();
+        services.AddScoped<ListarEntrenamientoUseCase>();
+        services.AddScoped<ModificarEntrenamientoUseCase>();
+        services.AddScoped<EliminarEntrenamientoUseCase>();
+
+        services.AddScoped<ListarEntrenamientosPorFechaUseCase>();
+        services.AddScoped<AgregarRutinaAEntrenamientoUseCase>();
+
+        /// RutinaEjercicio
+        services.AddScoped<AgregarEjercicioARutinaUseCase>();
+        services.AddScoped<ModificarSeriesYRepeticionesUseCase>();
+        services.AddScoped<QuitarEjercicioDeRutinaUseCase>();
+
+        /// validadores
+        services.AddScoped<ValidadorEjercicio>();
+        services.AddScoped<ValidadorRutina>();
+        services.AddScoped<ValidadorEntrenamiento>();
+        services.AddScoped<ValidadorRutinaEjercicio>();
 
         return services;
     }

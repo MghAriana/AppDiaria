@@ -6,7 +6,7 @@ namespace AppDiaria.Aplication.Interfaces;
 public interface IRepositorioRecordatorio
 {
     public void CrearRecordatorio(Recordatorio recordatorio);
-    public List<Recordatorio> ListarRecordatorios();
+    public List<Recordatorio> ListarRecordatorios(int usuarioId);
     public void EliminarRecordatorio(int id);
     public void ModificarRecordatorio(Recordatorio recordatorio);
     public Recordatorio? ObtenerId(int id);

@@ -10,5 +10,5 @@ public class RecordatorioDto
     public string? Nombre { get; set; }
     public string? Descripcion { get; set; }
     public DateTime FechayHora { get; set; }
-    public int IdUsuario{get;set;}
+    public int UsuarioId{get;set;}
 }

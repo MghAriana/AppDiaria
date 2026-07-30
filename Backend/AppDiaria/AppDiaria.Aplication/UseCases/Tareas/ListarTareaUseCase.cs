@@ -6,8 +6,8 @@ namespace AppDiaria.Aplication.UseCases.Tareas;
 
 public class ListarTareaUseCase(IRepositorioTarea repoT)
 {
-    public List<Tarea> Ejecutar()
+    public List<Tarea> Ejecutar(int usuarioId)
     {
-        return repoT.ListarTareas();
+        return repoT.ListarTareas(usuarioId);
     }
 }
