@@ -1,3 +1,18 @@
 .navbar {
-  padding: 1rem;
+  background-color: var(--primary-color) !important;
+  height: 64px;
+}
+
+.navbar-brand {
+  color: #2F3A2F !important;
+  font-weight: 700;
+}
+
+.navbar .btn {
+  border-color: #2F3A2F;
+  color: #2F3A2F;
+}
+
+.navbar .btn:hover {
+  background-color: var(--primary-hover);
 }

@@ -4,7 +4,7 @@ import { MainLayout } from './layout/main-layout/main-layout';
 import { Dashboard } from './features/dashboard/dashboard';
 
 export const routes: Routes = [
- {
+  {
     path: '',
     component: Home
   },
@@ -12,6 +12,11 @@ export const routes: Routes = [
     path: 'app',
     component: MainLayout,
     children: [
+      {
+        path: '',
+        redirectTo: 'dashboard',
+        pathMatch: 'full'
+      },
       {
         path: 'dashboard',
         component: Dashboard

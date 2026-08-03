@@ -1,0 +1,58 @@
+.hero {
+
+  min-height: 70vh;
+
+}
+
+
+.highlight {
+
+  color: #8BC34A;
+
+}
+
+
+.hero-icon {
+
+  font-size: 12rem;
+
+  color: #C6F396;
+
+}
+
+
+
+.feature-card {
+
+  border: none;
+
+  border-radius: 20px;
+
+  transition: transform .3s;
+
+
+  i {
+
+    font-size: 3rem;
+
+    color: #8BC34A;
+
+  }
+
+
+  &:hover {
+
+    transform: translateY(-8px);
+
+  }
+
+}
+//
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  filter: invert(1);
+}
+#routineCarousel {
+  background-color: #C6F396;
+  border-radius: 20px;
+}

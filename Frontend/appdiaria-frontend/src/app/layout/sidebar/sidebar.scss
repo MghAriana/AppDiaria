@@ -1,0 +1,22 @@
+.sidebar {
+  width: 250px;
+  min-height: calc(100vh - 64px);
+
+  background: var(--sidebar-bg);
+  border-right: 1px solid var(--border-color);
+}
+
+.nav-link {
+  color: var(--text-color) !important;
+  border-radius: 10px;
+  margin-bottom: .3rem;
+}
+
+.nav-link:hover {
+  background: var(--primary-color);
+}
+
+.nav-link.active {
+  background: var(--primary-color) !important;
+  color: #2F3A2F !important;
+}

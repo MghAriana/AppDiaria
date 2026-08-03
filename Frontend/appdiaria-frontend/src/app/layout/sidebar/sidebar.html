@@ -1,35 +1,52 @@
-<aside>
+<div class="d-flex flex-column flex-shrink-0 p-3 bg-dark text-white sidebar">
+  <h4 class="text-center mb-4">AppDiaria</h4>
 
-  <ul>
-    <li>
-      <a routerLink="/app/dashboard">
-        Inicio
+  <ul class="nav nav-pills flex-column mb-auto">
+
+    <a routerLink="/app/dashboard"
+    routerLinkActive="active"
+    class="nav-link text-white">
+
+      <i class="bi bi-house-fill me-2"></i>
+      Dashboard
+
+   </a>
+
+    <li class="nav-item mb-2">
+      <a routerLink="/app/tareas"
+         routerLinkActive="active"
+         class="nav-link text-white">
+         <i class="bi bi-check2-square me-2"></i>
+          Tareas
       </a>
     </li>
 
-    <li>
-      <a routerLink="/app/tareas">
-        Tareas
+    <li class="nav-item mb-2">
+      <a routerLink="/app/rutinas"
+         routerLinkActive="active"
+         class="nav-link text-white">
+         <i class="bi bi-activity me-2"></i>
+         Rutinas
       </a>
     </li>
 
-    <li>
-      <a routerLink="/app/rutinas">
-        Rutinas
+    <li class="nav-item mb-2">
+      <a routerLink="/app/recordatorios"
+         routerLinkActive="active"
+         class="nav-link text-white">
+         <i class="bi bi-bell-fill me-2"></i>
+         Recordatorios
       </a>
     </li>
 
-    <li>
-      <a routerLink="/app/entrenamientos">
-        Entrenamientos
+    <li class="nav-item mb-2">
+      <a routerLink="/app/perfil"
+         routerLinkActive="active"
+         class="nav-link text-white">
+         <i class="bi bi-person-circle me-2"></i>
+         Perfil
       </a>
     </li>
 
-    <li>
-      <a routerLink="/app/perfil">
-        Perfil
-      </a>
-    </li>
   </ul>
-
-</aside>
+</div>

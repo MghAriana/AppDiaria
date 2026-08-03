@@ -1,1 +1,32 @@
-/* You can add global styles to this file, and also import other style files */
+@import "bootstrap-icons/font/bootstrap-icons.css";
+:root {
+  --primary-color: #C6F396;
+  --primary-hover: #B7EA82;
+
+  --sidebar-bg: #e6ebe0;
+  --background: #FFFFFF;
+
+  --text-color: #696e69;
+  --border-color: #E6EEDC;
+}
+
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--text-color);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Botones */
+
+.btn-app {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: #2F3A2F;
+  font-weight: 600;
+}
+
+.btn-app:hover {
+  background-color: var(--primary-hover);
+  border-color: var(--primary-hover);
+}
