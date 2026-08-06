@@ -1,1 +1,65 @@
-<p>register works!</p>
+<div class="container mt-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-md-5">
+
+            <div class="card shadow">
+
+                <div class="card-body">
+
+                    <h3 class="text-center mb-4">
+                        Registrarse
+                    </h3>
+
+                    <form (ngSubmit)="registrar()">
+
+                        <div class="mb-3">
+                            <label class="form-label">Nombre</label>
+                            <input
+                                type="text"
+                                class="form-control"
+                                [(ngModel)]="nombre"
+                                name="nombre"
+                                required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Correo electrónico</label>
+                            <input
+                                type="email"
+                                class="form-control"
+                                [(ngModel)]="email"
+                                name="email"
+                                required>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label">Contraseña</label>
+                            <input
+                                type="password"
+                                class="form-control"
+                                [(ngModel)]="password"
+                                name="password"
+                                required>
+                        </div>
+
+                        <button
+                            class="btn btn-success w-100"
+                            type="submit">
+
+                            Crear cuenta
+
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

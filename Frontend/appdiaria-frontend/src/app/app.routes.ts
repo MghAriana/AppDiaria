@@ -9,6 +9,7 @@ import { Recordatorios } from './features/recordatorios/recordatorios';
 import { Rutinas } from './features/rutinas/rutinas';
 import { Perfil } from './features/perfil/perfil';
 import { Entrenamientos } from './features/entrenamientos/entrenamientos';
+import { authGuard } from './core/guards/auth-guard';
 
 export const routes: Routes = [
   //publicas
@@ -29,6 +30,7 @@ export const routes: Routes = [
   {
     path: 'app',
     component: MainLayout,
+     canActivate: [authGuard],
     children: [
       {
         path: '',

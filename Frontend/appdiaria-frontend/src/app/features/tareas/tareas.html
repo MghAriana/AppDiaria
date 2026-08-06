@@ -1,1 +1,94 @@
-<p>tareas works!</p>
+<h1>ESTOY EN TAREAS NUEVO</h1>
+<div class="container-fluid">
+    <!--titulo-->
+    <h2 class="fw-bold mb-4">
+        Mis tareas
+    </h2>
+    <!--nueva tarea-->
+    <div class="card mb-4">
+
+    <div class="card-body">
+
+    <h4>Nueva tarea</h4>
+
+
+    <input 
+    class="form-control mb-2"
+    placeholder="Nombre"
+    [(ngModel)]="nombre">
+
+
+    <textarea
+    class="form-control mb-2"
+    placeholder="Descripción"
+    [(ngModel)]="descripcion">
+    </textarea>
+
+
+    <label>Fecha inicio</label>
+
+    <input
+    type="datetime-local"
+    class="form-control mb-2"
+    [(ngModel)]="fechaInicio">
+
+
+    <label>Fecha fin</label>
+
+    <input
+    type="datetime-local"
+    class="form-control mb-2"
+    [(ngModel)]="fechaFin">
+
+
+    <button 
+    class="btn btn-app"
+    (click)="crearTarea()">
+
+    Crear tarea
+
+    </button>
+
+
+    </div>
+
+    </div>
+
+ <p>
+Cantidad de tareas: {{ tareas.length }}
+</p>
+
+
+ <!--Listado-->
+    <div *ngFor="let tarea of tareas">
+
+        <div class="card mb-3">
+
+            <div class="card-body">
+
+                <h5 class="card-title">
+                    {{ tarea.nombre }}
+                </h5>
+
+                <p class="card-text">
+                    {{ tarea.descripcion }}
+                </p>
+
+                <p>
+                    Desde:
+                    {{ tarea.fechaInicio | date }}
+                </p>
+
+                <p>
+                    Hasta:
+                    {{ tarea.fechaFin | date }}
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+</div>
