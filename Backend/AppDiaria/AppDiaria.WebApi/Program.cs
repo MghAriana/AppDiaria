@@ -101,7 +101,16 @@ builder.Services.AddHttpContextAccessor();
         });*/
 
     builder.Services.AddAuthorization();
-
+ //Angular
+ builder.Services.AddCors(options =>
+{
+    options.AddPolicy("Angular", policy =>
+    {
+        policy.WithOrigins("http://localhost:4200")
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
 
 
 
@@ -115,10 +124,11 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseCors("Angular");
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapControllers();
+//app.MapControllers();
 
 var summaries = new[]
 {
