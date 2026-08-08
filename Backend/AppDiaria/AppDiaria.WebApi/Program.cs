@@ -70,7 +70,10 @@ builder.Services.AddInfrastructure();
 builder.Services.AddHttpContextAccessor(); 
 
 //JWT
-    var key = builder.Configuration["Jwt:Key"];
+    var jwtSettings = builder.Configuration.GetSection("Jwt");
+
+    var key = jwtSettings["Key"]
+    ?? throw new Exception("Jwt:Key faltante en configuración");
 
     builder.Services.AddAuthentication("Bearer")
     .AddJwtBearer("Bearer", options =>
@@ -82,7 +85,7 @@ builder.Services.AddHttpContextAccessor();
             ValidateLifetime = true,
             ValidateIssuerSigningKey = true,
             IssuerSigningKey =
-                new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key!))
+                new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key))
         };
     });
    /* builder.Services.AddAuthentication("Bearer")

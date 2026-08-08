@@ -47,6 +47,7 @@ public static class InyeccionDependencias
         services.AddScoped<ListarRutinaUseCase>();
         services.AddScoped<ModificarRutinaUseCase>();
         services.AddScoped<EliminarRutinaUseCase>();
+        services.AddScoped<ListarMisRutinasUseCase>();
         /// Ejercicio
         services.AddScoped<AgregarEjercicioUseCase>();
         services.AddScoped<ListarEjercicioUseCase>();

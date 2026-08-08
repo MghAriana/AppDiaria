@@ -16,18 +16,21 @@ public class Rutina
     //para las relciones
     public ICollection<RutinaEjercicio> RutinaEjercicios { get; private set; } = new List<RutinaEjercicio>();
     public ICollection<EntrenamientoRutina> EntrenamientoRutinas { get; private set; } = new List<EntrenamientoRutina>();
+    public int? UsuarioId { get; private set; }
+    public Usuario? Usuario { get; set; }
     /*public int DuracionTotal{get;set;} //creo que no hace fata la variable porque se puede saber por algun metodo que recorra la lista de ejercicios y vaya sumando cada punto
     public int CantidadEjercicios{get;set;}
     public int CaloriasPerdidas{get;set;}
     public int RepeticionesTotales{get;set;} //hasta aca*/
     
     protected Rutina() { } // EF
-    public Rutina(string nombre, DayOfWeek dia, string descripcion, bool esPredeterminada)
+    public Rutina(string nombre, DayOfWeek dia, string descripcion, bool esPredeterminada, int? usuarioId)
     {
         Nombre = nombre;
         Dia = dia;
         Descripcion = descripcion;
         EsPredeterminada = esPredeterminada;
+        UsuarioId = usuarioId;
         }
    
     public void Actualizar(String nombre, DayOfWeek dia, string descripcion)

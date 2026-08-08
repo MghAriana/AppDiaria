@@ -37,12 +37,13 @@ public class RepositorioRutina : IRepositorioRutina
         _context.SaveChanges();
     }
 
-    public List<Rutina> ListarRutinas()
+    public List<Rutina> ObtenerDisponibles(int? usuarioId)
     {
         return _context.Rutinas
-            .Include(r => r.RutinaEjercicios)
+        .Where(r => r.EsPredeterminada || r.UsuarioId == usuarioId)
+        .Include(r => r.RutinaEjercicios)
             .ThenInclude(re => re.Ejercicio)
-            .ToList();
+        .ToList();
     }
     public void ModificarRutina(Rutina rutina)
     {
@@ -63,5 +64,14 @@ public class RepositorioRutina : IRepositorioRutina
                 .Include(r => r.RutinaEjercicios)
                     .ThenInclude(re => re.Ejercicio)
                 .SingleOrDefault(r => r.Id == id);
+    }
+
+    public List<Rutina> ObtenerPredeterminadas()
+    {
+       return _context.Rutinas
+        .Where(r => r.EsPredeterminada)
+        .Include(r => r.RutinaEjercicios)
+            .ThenInclude(re => re.Ejercicio)
+        .ToList();
     }
 }

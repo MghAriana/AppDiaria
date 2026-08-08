@@ -1,6 +1,7 @@
 using System;
 
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Http;
 using AppDiaria.Aplication.Interfaces;
 using AppDiaria.Infreaestructure.Repositorios;
 using AppDiaria.Infreaestructure.DB;
@@ -18,7 +19,8 @@ public static class DependencyInjection
     {
         // DbContext
         services.AddDbContext<AppDiariaContext>();
-
+        // Services
+        services.AddHttpContextAccessor();
         // Repositorios
         services.AddScoped<IRepositorioTarea, RepositorioTarea>();
         services.AddScoped<IRepositorioRecordatorio, RepositorioRecordatorio>();
