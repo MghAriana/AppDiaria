@@ -1,4 +1,4 @@
-import { Component, OnInit,ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, signal, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TareaService } from '../../core/services/tareaService';
 import { Tarea } from '../../core/models/tarea';
@@ -12,53 +12,46 @@ import { FormsModule } from '@angular/forms';
 })
 export class Tareas implements OnInit {
 
-  tareas: Tarea[] = [];
+  protected tareas = signal<Tarea[]>([]);
   nombre = '';
   descripcion = '';
   fechaInicio = '';
   fechaFin = '';
 
-  constructor(
-    private tareaService: TareaService,
-    private cd: ChangeDetectorRef
-  ) {
-     console.log("Constructor componente Tareas", this.tareas);
-  }
+  protected tareaService = inject(TareaService);
 
-
-  ngOnInit(): void {
+  public ngOnInit(): void {
 
     console.log("Entró al componente tareas");
     this.listarTareas();
   }
-listarTareas(){
 
-  console.log("Ejecutando listar tareas");
 
-  this.tareaService.listar()
-    .subscribe({
+  public listarTareas(){
 
-      next:(datos)=>{
+    console.log("Ejecutando listar tareas");
 
-        console.log("RESPUESTA API:", datos);
+    this.tareaService.listar()
+      .subscribe({
 
-        this.tareas = datos;
+        next:(datos)=>{
 
-        this.cd.detectChanges();
+          console.log("RESPUESTA API:", datos);
 
-        console.log("Tareas en componente:", this.tareas);
+          this.tareas.set(datos);
+        },
 
-      },
+        error:(error)=>{
 
-      error:(error)=>{
+          console.error("ERROR API:", error);
 
-        console.error("ERROR API:", error);
+        }
 
-      }
+      });
 
-    });
+  }
 
-}
+
 crearTarea(){
 
   const nuevaTarea = {
@@ -100,6 +93,6 @@ crearTarea(){
     });
 
 }
-
+  
 }
 

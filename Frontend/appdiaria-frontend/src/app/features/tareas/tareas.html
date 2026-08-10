@@ -55,14 +55,13 @@
     </div>
 
  <p>
-Cantidad de tareas: {{ tareas.length }}
+Cantidad de tareas: {{ tareas().length }}
 </p>
 
 
  <!--Listado-->
-    <div *ngFor="let tarea of tareas">
-
-        <div class="card mb-3">
+ <!--@for(let tarea of tareas(); track tarea.id){
+    <div class="card mb-3">
 
             <div class="card-body">
 
@@ -87,8 +86,5 @@ Cantidad de tareas: {{ tareas.length }}
             </div>
 
         </div>
+    }-->
 
-    </div>
-
-
-</div>
