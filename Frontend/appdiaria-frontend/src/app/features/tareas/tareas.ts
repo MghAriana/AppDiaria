@@ -1,98 +1,64 @@
-import { Component, OnInit, signal, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, signal, inject } from '@angular/core';
+import { httpResource } from '@angular/common/http';
+import { DatePipe } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { TareaService } from '../../core/services/tareaService';
 import { Tarea } from '../../core/models/tarea';
-import { FormsModule } from '@angular/forms';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-tareas',
-  imports: [CommonModule,FormsModule],
+  imports: [FormsModule, DatePipe],
   templateUrl: './tareas.html',
   styleUrl: './tareas.scss',
 })
-export class Tareas implements OnInit {
+export class Tareas {
+  private tareaService = inject(TareaService);
 
-  protected tareas = signal<Tarea[]>([]);
-  nombre = '';
-  descripcion = '';
-  fechaInicio = '';
-  fechaFin = '';
+  protected tareasResource = httpResource<Tarea[]>(
+    () => `${environment.apiUrl}/Tarea`
+  );
 
-  protected tareaService = inject(TareaService);
+  nombre = signal('');
+  descripcion = signal('');
+  fechaInicio = signal('');
+  fechaFin = signal('');
 
-  public ngOnInit(): void {
+  creando = signal(false);
+  mensaje = signal('');
+  errorMensaje = signal('');
 
-    console.log("Entró al componente tareas");
-    this.listarTareas();
-  }
+  crearTarea() {
+    if (this.creando()) return;
 
+    this.creando.set(true);
+    this.errorMensaje.set('');
 
-  public listarTareas(){
-
-    console.log("Ejecutando listar tareas");
-
-    this.tareaService.listar()
+    this.tareaService
+      .crear({
+        nombre: this.nombre(),
+        descripcion: this.descripcion(),
+        fecha: this.fechaInicio(),
+        fin: this.fechaFin(),
+      })
       .subscribe({
-
-        next:(datos)=>{
-
-          console.log("RESPUESTA API:", datos);
-
-          this.tareas.set(datos);
+        next: () => {
+          this.creando.set(false);
+          this.nombre.set('');
+          this.descripcion.set('');
+          this.fechaInicio.set('');
+          this.fechaFin.set('');
+          this.mensaje.set('Tarea creada correctamente');
+          this.tareasResource.reload();
         },
-
-        error:(error)=>{
-
-          console.error("ERROR API:", error);
-
-        }
-
+        error: () => {
+          this.creando.set(false);
+          this.errorMensaje.set('No se pudo crear la tarea. Inténtalo nuevamente.');
+        },
       });
-
   }
 
-
-crearTarea(){
-
-  const nuevaTarea = {
-
-    nombre: this.nombre,
-    descripcion: this.descripcion,
-    fecha: this.fechaInicio,
-    fin: this.fechaFin
-
-  };
-
-
-  this.tareaService.crear(nuevaTarea)
-    .subscribe({
-
-      next:()=>{
-
-        console.log("Tarea creada");
-
-        alert("Tarea creada correctamente");
-
-        this.nombre = '';
-        this.descripcion = '';
-        this.fechaInicio = '';
-        this.fechaFin = '';
-
-        this.listarTareas();
-
-      },
-
-      error:(error)=>{
-
-        console.error(error);
-
-        alert("Error al crear tarea");
-
-      }
-
-    });
-
+  limpiarMensaje() {
+    this.mensaje.set('');
+  }
 }
-  
-}
-
