@@ -24,7 +24,7 @@ public class ModificarTareaUseCase(IRepositorioTarea repo, ValidadorTarea valida
             dto.FechaFin
         );
 
-        if (validador.Validar(tarea, out var error))
+        if (!validador.Validar(tarea, out var error))
             throw new Exception(error);
 
         repo.ModificarTarea(tarea);

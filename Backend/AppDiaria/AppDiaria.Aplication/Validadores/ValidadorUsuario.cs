@@ -20,7 +20,7 @@ public class ValidadorUsuario(IRepositorioUsuario repoUs)
         }
         else
         {
-            if (!repoUs.ExisteEmail(usuario.Email))
+            if (repoUs.ExisteEmail(usuario.Email))
             {
                 MensajeError = "Email no valido";
             }

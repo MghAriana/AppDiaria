@@ -27,7 +27,7 @@ public class ModificarEjercicioUseCase
             dto.Descripcion
         );
 
-        if (_validador.Validar(ejercicio, out var error))
+        if (!_validador.Validar(ejercicio, out var error))
             throw new Exception(error);
 
         _repo.ModificarEjercicio(ejercicio);
