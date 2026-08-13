@@ -1,10 +1,8 @@
 import { RegisterRequest } from './../../../core/models/auth/registerRequest';
-import { Component } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '../../../core/services/authService'; 
-
-
+import { AuthService } from '../../../core/services/authService';
 
 @Component({
   selector: 'app-register',
@@ -13,48 +11,37 @@ import { AuthService } from '../../../core/services/authService';
   styleUrl: './register.scss',
 })
 export class Register {
+  private authService = inject(AuthService);
+  private router = inject(Router);
 
-  nombre = '';
-  email = '';
-  password = '';
-
-  constructor(
-    private authService: AuthService,
-    private router: Router
-  ) { }
+  nombre = signal('');
+  email = signal('');
+  password = signal('');
+  enviando = signal(false);
+  errorMensaje = signal('');
 
   registrar() {
+    if (this.enviando()) return;
+
+    this.enviando.set(true);
+    this.errorMensaje.set('');
 
     const usuario: RegisterRequest = {
-      nombre: this.nombre,
-      email: this.email,
-      contraseña: this.password,
-      fechaCreacion: new Date()
+      nombre: this.nombre(),
+      email: this.email(),
+      contraseña: this.password(),
+      fechaCreacion: new Date(),
     };
 
     this.authService.register(usuario).subscribe({
-
       next: () => {
-
-        console.log('Usuario registrado correctamente');
-
-        alert('Usuario registrado correctamente');
-
+        this.enviando.set(false);
         this.router.navigate(['/login']);
-
       },
-
-     /* error: (error) => {
-
-        console.error(error);
-
-        alert('Ocurrió un error al registrar el usuario');
-
-      }*/
-
+      error: () => {
+        this.enviando.set(false);
+        this.errorMensaje.set('Ocurrió un error al registrar el usuario.');
+      },
     });
-
   }
-  }
-
-
+}

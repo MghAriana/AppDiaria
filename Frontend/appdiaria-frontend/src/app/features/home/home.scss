@@ -1,51 +1,33 @@
 .hero {
-
   min-height: 70vh;
-
 }
-
 
 .highlight {
-
-  color: #8BC34A;
-
+  color: #8bc34a;
 }
-
 
 .hero-icon {
-
   font-size: 12rem;
 
-  color: #C6F396;
-
+  color: #c6f396;
 }
 
-
-
 .feature-card {
-
   border: none;
 
   border-radius: 20px;
 
-  transition: transform .3s;
-
+  transition: transform 0.3s;
 
   i {
-
     font-size: 3rem;
 
-    color: #8BC34A;
-
+    color: #8bc34a;
   }
-
 
   &:hover {
-
     transform: translateY(-8px);
-
   }
-
 }
 //
 .carousel-control-prev-icon,
@@ -53,6 +35,6 @@
   filter: invert(1);
 }
 #routineCarousel {
-  background-color: #C6F396;
+  background-color: #c6f396;
   border-radius: 20px;
 }

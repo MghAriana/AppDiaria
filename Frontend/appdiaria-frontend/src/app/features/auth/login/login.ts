@@ -1,6 +1,6 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router,RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../core/services/authService';
 
 @Component({
@@ -10,44 +10,35 @@ import { AuthService } from '../../../core/services/authService';
   styleUrl: './login.scss',
 })
 export class Login {
-  //servicios
   private authService = inject(AuthService);
   private router = inject(Router);
- //variables
-  email = '';
-  password = '';
 
-  ////////////metodos//////
+  email = signal('');
+  password = signal('');
+  enviando = signal(false);
+  errorMensaje = signal('');
+
   login() {
+    if (this.enviando()) return;
 
-  this.authService.login({
-    email: this.email,
-    contraseña: this.password
-  }).subscribe({
+    this.enviando.set(true);
+    this.errorMensaje.set('');
 
-    next: (respuesta) => {
-
-    localStorage.setItem('token', respuesta.token);
-
-    console.log('Login correcto');
-    console.log(respuesta);
-
-    this.router.navigate(['/app/dashboard']);
-
-      
-  },
-
-    error: (error) => {
-
-      console.error('Error al iniciar sesión');
-      console.error(error);
-
-    }
-
-  });
-  
-
-}
-
-
+    this.authService
+      .login({
+        email: this.email(),
+        contraseña: this.password(),
+      })
+      .subscribe({
+        next: (respuesta) => {
+          this.enviando.set(false);
+          localStorage.setItem('token', respuesta.token);
+          this.router.navigate(['/app/dashboard']);
+        },
+        error: () => {
+          this.enviando.set(false);
+          this.errorMensaje.set('Email o contraseña incorrectos.');
+        },
+      });
+  }
 }

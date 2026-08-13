@@ -1,14 +1,14 @@
-@import "bootstrap-icons/font/bootstrap-icons.css";
+@import 'bootstrap-icons/font/bootstrap-icons.css';
 :root {
-  --primary-color: #C6F396;
-  --primary-hover: #B7EA82;
+  --primary-color: #c6f396;
+  --primary-hover: #b7ea82;
   /*113, 243, 94*/
 
   --sidebar-bg: #e6ebe0;
-  --background: #FFFFFF;
+  --background: #ffffff;
 
   --text-color: #696e69;
-  --border-color: #E6EEDC;
+  --border-color: #e6eedc;
 }
 
 body {
@@ -23,7 +23,7 @@ body {
 .btn-app {
   background-color: var(--primary-color);
   border-color: var(--primary-color);
-  color: #2F3A2F;
+  color: #2f3a2f;
   font-weight: 600;
 }
 

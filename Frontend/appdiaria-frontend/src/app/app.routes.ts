@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 import { Home } from './features/home/home';
 import { MainLayout } from './layout/main-layout/main-layout';
 import { Dashboard } from './features/dashboard/dashboard';
-import { Login} from './features/auth/login/login';
+import { Login } from './features/auth/login/login';
 import { Register } from './features/auth/register/register';
 import { Tareas } from './features/tareas/tareas';
 import { Recordatorios } from './features/recordatorios/recordatorios';
@@ -15,57 +15,55 @@ export const routes: Routes = [
   //publicas
   {
     path: '',
-    component: Home
+    component: Home,
   },
-   {
+  {
     path: 'login',
-    component: Login
+    component: Login,
   },
   {
     path: 'registro',
-    component: Register
-  }
-  ,
+    component: Register,
+  },
   //privadas
   {
     path: 'app',
     component: MainLayout,
-     canActivate: [authGuard],
+    canActivate: [authGuard],
     children: [
       {
         path: '',
         redirectTo: 'dashboard',
-        pathMatch: 'full'
+        pathMatch: 'full',
       },
       {
         path: 'dashboard',
-        component: Dashboard
+        component: Dashboard,
       },
       {
         path: 'tareas',
-        component: Tareas
+        component: Tareas,
       },
-            {
+      {
         path: 'entrenamientos',
-        component: Entrenamientos
+        component: Entrenamientos,
       },
       {
         path: 'rutinas',
-        component: Rutinas
+        component: Rutinas,
       },
       {
         path: 'recordatorios',
-        component: Recordatorios
+        component: Recordatorios,
       },
       {
         path: 'perfil',
-        component: Perfil
+        component: Perfil,
       },
-
-    ]
+    ],
   },
   {
     path: '**',
-    redirectTo: ''
-  }
+    redirectTo: '',
+  },
 ];

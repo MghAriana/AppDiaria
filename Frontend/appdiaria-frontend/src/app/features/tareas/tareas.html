@@ -1,105 +1,122 @@
 <h1>ESTOY EN TAREAS NUEVO</h1>
 <div class="container-fluid">
-    <!--titulo-->
-    <h2 class="fw-bold mb-4">
-        Mis tareas
-    </h2>
+  <!--titulo-->
+  <h2 class="fw-bold mb-4">Mis tareas</h2>
 
-    @if (mensaje()) {
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            {{ mensaje() }}
-            <button type="button" class="btn-close" aria-label="Cerrar" (click)="limpiarMensaje()"></button>
-        </div>
-    }
-
-    @if (errorMensaje()) {
-        <div class="alert alert-danger" role="alert">
-            {{ errorMensaje() }}
-        </div>
-    }
-
-    <!--nueva tarea-->
-    <div class="card mb-4">
-        <div class="card-body">
-            <h4>Nueva tarea</h4>
-
-            <input
-                class="form-control mb-2"
-                placeholder="Nombre"
-                [(ngModel)]="nombre" />
-
-            <textarea
-                class="form-control mb-2"
-                placeholder="Descripción"
-                [(ngModel)]="descripcion"></textarea>
-
-            <label>Fecha inicio</label>
-            <input
-                type="datetime-local"
-                class="form-control mb-2"
-                [(ngModel)]="fechaInicio" />
-
-            <label>Fecha fin</label>
-            <input
-                type="datetime-local"
-                class="form-control mb-2"
-                [(ngModel)]="fechaFin" />
-
-            <button
-                class="btn btn-app"
-                (click)="crearTarea()"
-                [disabled]="creando()">
-                {{ creando() ? 'Creando...' : 'Crear tarea' }}
-            </button>
-        </div>
+  @if (mensaje()) {
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      {{ mensaje() }}
+      <button
+        type="button"
+        class="btn-close"
+        aria-label="Cerrar"
+        (click)="limpiarMensaje()"
+      ></button>
     </div>
+  }
 
-    <!--Listado-->
-    @if (tareasResource.isLoading()) {
-        <div class="text-center py-4">
-            <div class="spinner-border text-success" role="status">
-                <span class="visually-hidden">Cargando...</span>
-            </div>
-        </div>
-    } @else if (tareasResource.error()) {
-        <div class="alert alert-danger" role="alert">
-            No se pudieron cargar las tareas. Inténtalo nuevamente.
-        </div>
-    } @else {
-        @let total = tareasResource.value()?.length ?? 0;
+  @if (errorMensaje()) {
+    <div class="alert alert-danger" role="alert">
+      {{ errorMensaje() }}
+    </div>
+  }
 
-        <p>
-            Cantidad de tareas: {{ total }}
-        </p>
+  <!--nueva tarea-->
+  <div class="card mb-4">
+    <div class="card-body">
+      <h4>
+        {{ tareaEditandoId() ? 'Editar tarea' : 'Nueva tarea' }}
+      </h4>
 
-        @if (total === 0) {
-            <div class="alert alert-info">
-                No tienes tareas todavía.
-            </div>
+      <input class="form-control mb-2" placeholder="Nombre" [(ngModel)]="nombre" />
+
+      <textarea
+        class="form-control mb-2"
+        placeholder="Descripción"
+        [(ngModel)]="descripcion"
+      ></textarea>
+
+      <label>Fecha inicio</label>
+      <input type="datetime-local" class="form-control mb-2" [(ngModel)]="fechaInicio" />
+
+      <label>Fecha fin</label>
+      <input type="datetime-local" class="form-control mb-2" [(ngModel)]="fechaFin" />
+
+        <button
+          type="button"
+          class="btn btn-app"
+          (click)="guardarTarea()"
+          [disabled]="guardando()"
+        >
+      >
+        @if (guardando()) {
+          Guardando...
         } @else {
-            @for (tarea of tareasResource.value() ?? []; track tarea.id) {
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            {{ tarea.nombre }}
-                        </h5>
-
-                        <p class="card-text">
-                            {{ tarea.descripcion }}
-                        </p>
-
-                        <p>
-                            Desde:
-                            {{ tarea.fechaInicio | date }}
-                        </p>
-
-                        <p>
-                            Hasta:
-                            {{ tarea.fechaFin | date }}
-                        </p>
-                    </div>
-                </div>
-            }
+          {{ tareaEditandoId() ? 'Guardar cambios' : 'Crear tarea' }}
         }
+      </button>
+    </div>
+  </div>
+
+  <!--Listado-->
+  @if (tareasResource.isLoading()) {
+    <div class="text-center py-4">
+      <div class="spinner-border text-success" role="status">
+        <span class="visually-hidden">Cargando...</span>
+      </div>
+    </div>
+  } @else if (tareasResource.error()) {
+    <div class="alert alert-danger" role="alert">
+      No se pudieron cargar las tareas. Inténtalo nuevamente.
+    </div>
+  } @else {
+    @let total = tareasResource.value()?.length ?? 0;
+
+    <p>Cantidad de tareas: {{ total }}</p>
+
+    @if (total === 0) {
+      <div class="alert alert-info">No tienes tareas todavía.</div>
+    } @else {
+      @for (tarea of tareasResource.value() ?? []; track tarea.id) {
+        <div class="card mb-3">
+          <div class="card-body">
+            <h5 class="card-title">
+              {{ tarea.nombre }}
+            </h5>
+
+            <p class="card-text">
+              {{ tarea.descripcion }}
+            </p>
+
+            <p>
+              Desde:
+              {{ tarea.fechaInicio | date }}
+            </p>
+
+            <p>
+              Hasta:
+              {{ tarea.fechaFin | date }}
+            </p>
+          </div>
+         <!-- EDITAR -->
+        <button
+          class="btn btn-warning"
+          (click)="editarTarea(tarea)"
+        >
+          <i class="bi bi-pencil"></i>
+          Editar
+        </button>
+
+        <!-- ELIMINAR -->
+          <button
+            class="btn btn-danger"
+            (click)="eliminarTarea(tarea.id)"
+          >
+            <i class="bi bi-trash"></i>
+            {{ eliminando() ? 'Eliminando...' : 'Eliminar' }}
+          </button>
+        </div>
+      }
     }
+  }
 </div>
