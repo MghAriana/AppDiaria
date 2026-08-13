@@ -71,7 +71,8 @@ namespace AppDiaria.WebApi.Controllers.ControllersSeccionRutinas
         {
             _modificar.Ejecutar(id, dto);
             return Ok();
-        }   
+        }  
+        [Authorize] 
         [HttpDelete("{id}")]
         public IActionResult Eliminar(int id)
         {

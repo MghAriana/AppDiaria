@@ -1,6 +1,7 @@
 using AppDiaria.Aplication.DTOS.Ejercicios;
 using AppDiaria.Aplication.UseCases.Ejercicios;
 using AppDiaria.Aplication.UseCases.Entrenamiento;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -53,6 +54,7 @@ namespace AppDiaria.WebApi.Controllers.ControllersSeccionRutinas
             return Ok();
         }
 
+        [Authorize]
         [HttpDelete("{id}")]
         public IActionResult Eliminar(int id)
         {
