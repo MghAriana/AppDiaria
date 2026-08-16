@@ -1,0 +1,28 @@
+@if (abierto()) {
+  <div class="modal-backdrop" (click)="cerrar.emit()">
+
+    <div class="modal-contenido" (click)="$event.stopPropagation()">
+
+      <div class="modal-header">
+        <h5 class="modal-title">
+            <ng-content select="[title]"></ng-content>
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          aria-label="Cerrar"
+          (click)="cerrar.emit()">
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <ng-content select="[body]"></ng-content>
+      </div>
+
+        <div class="modal-footer">
+            <ng-content select="[footer]"></ng-content>
+        </div>
+    </div>
+
+  </div>
+}

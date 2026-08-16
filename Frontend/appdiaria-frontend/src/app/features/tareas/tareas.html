@@ -22,13 +22,33 @@
   }
 
   <!--nueva tarea-->
-  <div class="card mb-4">
-    <div class="card-body">
-      <h4>
-        {{ tareaEditandoId() ? 'Editar tarea' : 'Nueva tarea' }}
-      </h4>
+  <button
+    type="button"
+    class="btn btn-app mb-4"
+    (click)="abrirModal()"
+  >
+    <i class="bi bi-plus-lg"></i>
+    Nueva tarea
+  </button>
+    <!-- MODAL -->
 
-      <input class="form-control mb-2" placeholder="Nombre" [(ngModel)]="nombre" />
+  <app-modal
+    [abierto]="modalAbierto()"
+    (cerrar)="cerrarModal()"
+  >
+  
+  <div title>
+    <span>{{ tareaEditandoId() ? 'Editar tarea' : 'Crear tarea' }}</span>
+  </div>
+
+  <div body>
+      <!-- FORMULARIO DE TAREA -->
+
+      <input
+        class="form-control mb-2"
+        placeholder="Nombre"
+        [(ngModel)]="nombre"
+      />
 
       <textarea
         class="form-control mb-2"
@@ -36,27 +56,52 @@
         [(ngModel)]="descripcion"
       ></textarea>
 
+
       <label>Fecha inicio</label>
-      <input type="datetime-local" class="form-control mb-2" [(ngModel)]="fechaInicio" />
+
+      <input
+        type="datetime-local"
+        class="form-control mb-2"
+        [(ngModel)]="fechaInicio"
+      />
+
 
       <label>Fecha fin</label>
-      <input type="datetime-local" class="form-control mb-2" [(ngModel)]="fechaFin" />
 
-        <button
-          type="button"
-          class="btn btn-app"
-          (click)="guardarTarea()"
-          [disabled]="guardando()"
-        >
-      >
-        @if (guardando()) {
-          Guardando...
-        } @else {
-          {{ tareaEditandoId() ? 'Guardar cambios' : 'Crear tarea' }}
-        }
-      </button>
-    </div>
+      <input
+        type="datetime-local"
+        class="form-control mb-3"
+        [(ngModel)]="fechaFin"
+      />
+    
   </div>
+
+
+    <!-- BOTONES -->
+<div footer>  
+    <button
+      type="button"
+      class="btn btn-app me-2"
+      (click)="guardarTarea()"
+      [disabled]="guardando()"
+    >
+      @if (guardando()) {
+        Guardando...
+      } @else {
+        {{ tareaEditandoId() ? 'Guardar cambios' : 'Crear tarea' }}
+      }
+    </button>
+
+
+    <button
+      type="button"
+      class="btn btn-secondary"
+      (click)="cerrarModal()"
+    >
+      Cancelar
+    </button>
+    </div>
+  </app-modal>
 
   <!--Listado-->
   @if (tareasResource.isLoading()) {
@@ -77,46 +122,50 @@
     @if (total === 0) {
       <div class="alert alert-info">No tienes tareas todavía.</div>
     } @else {
-      @for (tarea of tareasResource.value() ?? []; track tarea.id) {
-        <div class="card mb-3">
-          <div class="card-body">
-            <h5 class="card-title">
-              {{ tarea.nombre }}
-            </h5>
 
-            <p class="card-text">
-              {{ tarea.descripcion }}
-            </p>
-
-            <p>
-              Desde:
-              {{ tarea.fechaInicio | date }}
-            </p>
-
-            <p>
-              Hasta:
-              {{ tarea.fechaFin | date }}
-            </p>
-          </div>
-         <!-- EDITAR -->
-        <button
-          class="btn btn-warning"
-          (click)="editarTarea(tarea)"
-        >
-          <i class="bi bi-pencil"></i>
-          Editar
-        </button>
-
-        <!-- ELIMINAR -->
+      <div  class="card-container">
+        @for (tarea of tareasResource.value() ?? []; track tarea.id) {
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">
+                {{ tarea.nombre }}
+              </h5>
+  
+              <p class="card-text">
+                {{ tarea.descripcion }}
+              </p>
+  
+              <p>
+                Desde:
+                {{ tarea.fechaInicio | date }}
+              </p>
+  
+              <p>
+                Hasta:
+                {{ tarea.fechaFin | date }}
+              </p>
+            </div>
+           <!-- EDITAR -->
           <button
-            class="btn btn-danger"
-            (click)="eliminarTarea(tarea.id)"
+            class="btn btn-app me-2"
+            (click)="editarTarea(tarea)"
           >
-            <i class="bi bi-trash"></i>
-            {{ eliminando() ? 'Eliminando...' : 'Eliminar' }}
+            <i class="bi bi-pencil"></i>
+            Editar
           </button>
-        </div>
-      }
+   
+          <!-- ELIMINAR -->
+            <button
+              class="btn btn-app me-2"
+              (click)="eliminarTarea(tarea.id)"
+            >
+              <i class="bi bi-trash"></i>
+              {{ eliminando() ? 'Eliminando...' : 'Eliminar' }}
+            </button>
+          </div>
+        }
+
+      </div>
     }
   }
 </div>

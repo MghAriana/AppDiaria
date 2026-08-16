@@ -7,10 +7,11 @@ import { Tarea } from '../../core/models/tarea';
 import { CrearTareaRequest } from '../../core/models/crear-tarea-request';
 import { environment } from '../../../environments/environment';
 import { ActualizarTareaRequest } from '../../core/models/actualizar-tarea-request';
+import { Modal } from '../../global/components/modal/modal';
 
 @Component({
   selector: 'app-tareas',
-  imports: [FormsModule, DatePipe],
+  imports: [FormsModule, DatePipe, Modal],
   templateUrl: './tareas.html',
   styleUrl: './tareas.scss',
 })
@@ -29,6 +30,8 @@ export class Tareas {
   tareaEditandoId = signal<number | null>(null);
   mensaje = signal('');
   errorMensaje = signal('');
+  //dialogos
+  modalAbierto = signal(false);
 
   crearTarea() {
 
@@ -55,6 +58,7 @@ export class Tareas {
           this.fechaFin.set('');
           this.mensaje.set('Tarea creada correctamente');
           this.tareasResource.reload();
+          this.cerrarModal();
         },
         error: () => {
           this.guardando.set(false);
@@ -113,6 +117,9 @@ export class Tareas {
     this.fechaFin.set(
       this.formatearFechaParaInput(tarea.fechaFin)
     );
+    
+    this.abrirModal();
+
   }
 
   private formatearFechaParaInput(fecha: Date): string {
@@ -187,6 +194,7 @@ guardarTarea() {
         );
 
         this.tareasResource.reload();
+        this.cerrarModal();
       },
 
       error: () => {
@@ -200,5 +208,18 @@ guardarTarea() {
 
     });
   }
-  
+  abrirModal() {
+  this.modalAbierto.set(true);
+}
+
+cerrarModal() {
+   this.modalAbierto.set(false);
+
+  this.tareaEditandoId.set(null);
+
+  this.nombre.set('');
+  this.descripcion.set('');
+  this.fechaInicio.set('');
+  this.fechaFin.set('');
+}
 }

@@ -13,7 +13,11 @@ export class AuthService {
   private apiUrl = environment.apiUrl;
 
   login(datos: LoginRequest) {
-    return this.http.post<LoginResponse>(`${this.apiUrl}/Auth/login`, datos);
+    const body = {
+      email: datos.email,
+      contraseña: datos.password,
+    };
+    return this.http.post<LoginResponse>(`${this.apiUrl}/Auth/login`, body);
   }
 
   /*probemos
@@ -25,7 +29,13 @@ export class AuthService {
   logout() {
     localStorage.removeItem('token');
   }
+  
   register(datos: RegisterRequest) {
-    return this.http.post(`${this.apiUrl}/Usuario`, datos);
+    const body2 = {
+      nombre: datos.nombre,
+      email: datos.email,
+      contraseña: datos.password,
+    };
+    return this.http.post(`${this.apiUrl}/Usuario`, body2);
   }
 }

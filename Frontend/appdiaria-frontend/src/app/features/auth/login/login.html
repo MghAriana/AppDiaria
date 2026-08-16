@@ -8,22 +8,40 @@
       </div>
     }
 
-    <div class="mb-3">
-      <label class="form-label"> Email </label>
+    <form novalidate (ngSubmit)="login()">
+      <div class="mb-3">
+        <label class="form-label"> Email </label>
 
-      <input type="email" class="form-control" [(ngModel)]="email" />
-    </div>
+        <input type="email" class="form-control" [formField]="loginForm.email" />
+        @if (loginForm.email().invalid() && loginForm.email().touched()) {
+          <p class="error">Email has validation errors:</p>
+          <ul>
+            @for (error of loginForm.email().errors(); track error) {
+              <li>{{ error.message }}</li>
+            }
+          </ul>
+        }
+      </div>
 
-    <div class="mb-4">
-      <label class="form-label"> Contraseña </label>
+      <div class="mb-4">
+        <label class="form-label"> Contraseña </label>
 
-      <input type="password" class="form-control" [(ngModel)]="password" />
-    </div>
-
+        <input type="password" class="form-control" [formField]="loginForm.password" />
+        @if (loginForm.password().invalid() && loginForm.password().touched()) {
+          <p class="error">Password has validation errors:</p>
+          <ul>
+            @for (error of loginForm.password().errors(); track error) {
+              <li>{{ error.message }}</li>
+            }
+          </ul>
+        }
+      </div>
+    
     <button class="btn btn-app w-100" (click)="login()" [disabled]="enviando()">
       {{ enviando() ? 'Ingresando...' : 'Iniciar sesión' }}
     </button>
 
+    </form>
     <p class="text-center mt-3 mb-0">
       ¿No tenés cuenta?
 

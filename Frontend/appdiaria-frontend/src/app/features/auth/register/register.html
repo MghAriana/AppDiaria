@@ -11,15 +11,31 @@
             </div>
           }
 
-          <form (ngSubmit)="registrar()">
+          <form novalidate >
             <div class="mb-3">
               <label class="form-label">Nombre</label>
-              <input type="text" class="form-control" [(ngModel)]="nombre" name="nombre" required />
+              <input type="text" class="form-control" [formField]="registrationForm.nombre" />
+              @if (registrationForm.nombre().invalid() && registrationForm.nombre().touched()) {
+                 <p class="error">Name has validation errors:</p>
+                 <ul>
+                  @for (error of registrationForm.nombre().errors(); track error) {
+                    <li>{{ error.message }}</li>
+                  }
+                </ul>
+              }
             </div>
 
             <div class="mb-3">
               <label class="form-label">Correo electrónico</label>
-              <input type="email" class="form-control" [(ngModel)]="email" name="email" required />
+              <input type="email" class="form-control" [formField]="registrationForm.email" />
+              @if (registrationForm.email().invalid()&& registrationForm.email().touched()) {
+                <p class="error">Email has validation errors:</p>
+                <ul>
+                  @for (error of registrationForm.email().errors(); track error) {
+                    <li>{{ error.message }}</li>
+                  }
+                </ul>
+              }
             </div>
 
             <div class="mb-4">
@@ -27,13 +43,19 @@
               <input
                 type="password"
                 class="form-control"
-                [(ngModel)]="password"
-                name="password"
-                required
+                [formField]="registrationForm.password"
               />
+              @if (registrationForm.password().invalid() && registrationForm.password().touched()) {
+                <p class="error">Password has validation errors:</p>
+                <ul>
+                  @for (error of registrationForm.password().errors(); track error) {
+                    <li>{{ error.message }}</li>
+                  }
+                </ul>
+              }
             </div>
 
-            <button class="btn btn-success w-100" type="submit" [disabled]="enviando()">
+            <button class="btn btn-success w-100" type="button" (click)="registrar()" [disabled]="enviando()">
               {{ enviando() ? 'Creando cuenta...' : 'Crear cuenta' }}
             </button>
           </form>

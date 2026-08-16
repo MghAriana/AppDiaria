@@ -1,12 +1,12 @@
 import { RegisterRequest } from './../../../core/models/auth/registerRequest';
 import { Component, inject, signal } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../core/services/authService';
+import { form, required, FormField, minLength } from '@angular/forms/signals';
 
 @Component({
   selector: 'app-register',
-  imports: [FormsModule],
+  imports: [FormField],
   templateUrl: './register.html',
   styleUrl: './register.scss',
 })
@@ -14,11 +14,23 @@ export class Register {
   private authService = inject(AuthService);
   private router = inject(Router);
 
-  nombre = signal('');
-  email = signal('');
-  password = signal('');
-  enviando = signal(false);
+  usuario: RegisterRequest = {
+      nombre: '',
+      email: '',
+      password: '',
+    }; 
+    
+  protected registrationModel = signal<RegisterRequest>(this.usuario);
+
+  protected registrationForm = form(this.registrationModel, (schemaPath) => {
+    required(schemaPath.nombre, {message: 'Username is required'});
+    minLength(schemaPath.nombre, 3, {message: 'Username must be at least 3 characters long'});
+    required(schemaPath.email, {message: 'Email is required'});
+    required(schemaPath.password, {message: 'Password is required'});
+  });
+
   errorMensaje = signal('');
+  enviando = signal(false);
 
   registrar() {
     if (this.enviando()) return;
@@ -26,14 +38,8 @@ export class Register {
     this.enviando.set(true);
     this.errorMensaje.set('');
 
-    const usuario: RegisterRequest = {
-      nombre: this.nombre(),
-      email: this.email(),
-      contraseña: this.password(),
-      fechaCreacion: new Date(),
-    };
-
-    this.authService.register(usuario).subscribe({
+    this.authService.register(this.registrationModel())
+    .subscribe({
       next: () => {
         this.enviando.set(false);
         this.router.navigate(['/login']);

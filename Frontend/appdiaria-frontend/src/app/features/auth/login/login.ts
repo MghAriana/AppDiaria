@@ -1,11 +1,13 @@
+
 import { Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../core/services/authService';
-
+import {LoginRequest} from '../../../core/models/auth/loginRequest';
+import { form, required, FormField ,email} from '@angular/forms/signals';
 @Component({
   selector: 'app-login',
-  imports: [FormsModule, RouterLink],
+  imports: [FormsModule, RouterLink, FormField],
   templateUrl: './login.html',
   styleUrl: './login.scss',
 })
@@ -13,10 +15,22 @@ export class Login {
   private authService = inject(AuthService);
   private router = inject(Router);
 
-  email = signal('');
-  password = signal('');
-  enviando = signal(false);
   errorMensaje = signal('');
+  enviando = signal(false);
+
+  usuario: LoginRequest = {
+        email: '',
+        password: '',
+      }; 
+
+  protected loginModel = signal<LoginRequest>(this.usuario);
+
+  protected loginForm = form(this.loginModel, (schemaPath) => {
+    required(schemaPath.email, {message: 'Email is required'});
+    email(schemaPath.email, {message: 'Email must be a valid email address'});
+    required(schemaPath.password, {message: 'Password is required'});
+  })
+
 
   login() {
     if (this.enviando()) return;
@@ -24,11 +38,9 @@ export class Login {
     this.enviando.set(true);
     this.errorMensaje.set('');
 
+
     this.authService
-      .login({
-        email: this.email(),
-        contraseña: this.password(),
-      })
+      .login(this.loginModel())
       .subscribe({
         next: (respuesta) => {
           this.enviando.set(false);

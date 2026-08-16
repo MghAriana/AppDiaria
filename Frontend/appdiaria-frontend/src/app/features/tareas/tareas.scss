@@ -1,0 +1,25 @@
+
+
+.card-container {
+  display: grid;                 /* Activa el modo grilla */
+  grid-template-columns: repeat(3, 1fr); /* Crea 3 columnas iguales */
+  gap: 20px;                     /* Separa los elementos por 20px */
+}
+
+.card{
+  display: flex;
+  flex-direction: column;
+
+  background-color: white;
+  border-radius: 12px;
+
+  min-height: 250px;
+
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+
+  overflow: hidden;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
